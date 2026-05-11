@@ -1,0 +1,4 @@
+- [ ] Fix footer rendering issue
+  - [ ] Ensure footer shared HTML injection triggers footer canvas initialization in assets/site.js
+  - [ ] Verify footer animations show after shared footer loads on all pages
+  - [ ] Verify layout/CSS applies correctly
