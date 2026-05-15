@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,18 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-/* HERO SLIDER */
-.page-hero { position:relative; min-height:580px; overflow:hidden; display:flex; align-items:flex-end; }
-.phs-track { position:absolute; inset:0; z-index:0; }
-.phs-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.07); transition:opacity 1.4s cubic-bezier(.4,0,.2,1), transform 9s cubic-bezier(.25,0,.05,1); will-change:opacity,transform; }
-.phs-slide.is-active { opacity:1; transform:scale(1.0); }
-.phs-slide.is-out { opacity:0; transform:scale(1.03); transition:opacity 1.4s cubic-bezier(.4,0,.2,1), transform 1.4s ease; }
-.phs-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(13,27,42,.55) 0%, rgba(13,27,42,.25) 40%, rgba(13,27,42,.92) 100%); }
-.phs-overlay-color { position:absolute; inset:0; z-index:1; background:radial-gradient(ellipse at 20% 30%, rgba(245,200,0,.08) 0%, transparent 60%); animation:overlay-pulse 8s ease-in-out infinite; }
-@keyframes overlay-pulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+.page-hero { position:relative; min-height:580px; overflow:hidden; }
 .phs-scanlines { position:absolute; inset:0; z-index:2; pointer-events:none; background:repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(43,142,199,.016) 3px, rgba(43,142,199,.016) 4px); }
-.phs-grid { position:absolute; inset:0; z-index:2; pointer-events:none; background-image:linear-gradient(rgba(43,142,199,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(43,142,199,.04) 1px, transparent 1px); background-size:60px 60px; animation:grid-drift 30s linear infinite; }
-@keyframes grid-drift { from{background-position:0 0} to{background-position:60px 60px} }
 .phs-shapes { position:absolute; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
 .phs-shape { position:absolute; border:1px solid rgba(245,200,0,.2); animation:shape-float 22s linear infinite; }
 .phs-shape:nth-child(1) { width:44px; height:44px; top:18%; right:14%; border-radius:6px; animation-duration:20s; }
@@ -26,388 +16,84 @@
 .phs-shape:nth-child(3) { width:80px; height:2px; top:32%; left:6%; border:none; background:linear-gradient(90deg,transparent,rgba(245,200,0,.35),transparent); animation-duration:26s; animation-delay:-11s; }
 .phs-shape:nth-child(4) { width:18px; height:18px; bottom:32%; left:18%; border-radius:4px; border-color:rgba(245,200,0,.22); animation-duration:15s; animation-delay:-3s; }
 .phs-shape:nth-child(5) { width:60px; height:60px; top:10%; left:40%; border-radius:50%; border-color:rgba(43,142,199,.1); border-width:2px; animation-duration:32s; animation-delay:-8s; }
-@keyframes shape-float { 0%,100%{transform:translateY(0) rotate(0deg);opacity:.5} 33%{transform:translateY(-24px) rotate(120deg);opacity:1} 66%{transform:translateY(-12px) rotate(240deg);opacity:.7} }
+@keyframes shape-float { 0%,100% { transform:translateY(0) rotate(0deg); opacity:.5; } 33% { transform:translateY(-24px) rotate(120deg); opacity:1; } 66% { transform:translateY(-12px) rotate(240deg); opacity:.7; } }
 .phs-sweep { position:absolute; inset:0; z-index:3; pointer-events:none; background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.04) 50%, transparent 70%); background-size:300% 100%; animation:sweep-move 8s ease-in-out infinite; }
-@keyframes sweep-move { 0%,100%{background-position:-100% 0} 50%{background-position:200% 0} }
+@keyframes sweep-move { 0%,100% { background-position:-100% 0; } 50% { background-position:200% 0; } }
 .phs-brackets { position:absolute; inset:24px; z-index:4; pointer-events:none; }
 .phs-bracket { position:absolute; width:28px; height:28px; border-color:rgba(245,200,0,.4); border-style:solid; animation:bracket-pulse 3s ease-in-out infinite; }
 .phs-bracket.tl { top:0; left:0; border-width:2px 0 0 2px; border-radius:4px 0 0 0; }
 .phs-bracket.tr { top:0; right:0; border-width:2px 2px 0 0; border-radius:0 4px 0 0; animation-delay:.5s; }
 .phs-bracket.bl { bottom:0; left:0; border-width:0 0 2px 2px; border-radius:0 0 0 4px; animation-delay:1s; }
 .phs-bracket.br { bottom:0; right:0; border-width:0 2px 2px 0; border-radius:0 0 4px 0; animation-delay:1.5s; }
-@keyframes bracket-pulse { 0%,100%{opacity:.25} 50%{opacity:.8} }
-.phs-counter { position:absolute; top:32px; right:32px; z-index:8; display:flex; align-items:center; gap:10px; }
-.phs-counter-num { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.5); }
-.phs-counter-num.active { color:var(--gold); font-size:15px; }
-.phs-counter-sep { width:30px; height:1px; background:rgba(255,255,255,.2); }
-.phs-progress { position:absolute; bottom:0; left:0; right:0; z-index:8; height:3px; background:rgba(255,255,255,.08); }
-.phs-progress-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--sky)); width:0%; transition:width linear; border-radius:0 2px 2px 0; }
-.phs-dots { position:absolute; bottom:24px; right:32px; z-index:8; display:flex; gap:8px; align-items:center; }
-.phs-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.3); cursor:pointer; transition:all .4s ease; }
-.phs-dot.active { background:var(--gold); width:22px; border-radius:3px; box-shadow:0 0 8px rgba(245,200,0,.5); }
-.phs-arrows { position:absolute; bottom:18px; left:32px; z-index:8; display:flex; gap:10px; }
-.phs-arrow { width:36px; height:36px; border-radius:50%; background:rgba(13,27,42,.6); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .3s ease; color:rgba(255,255,255,.7); }
-.phs-arrow:hover { background:var(--gold); border-color:var(--gold); color:var(--navy); transform:scale(1.1); }
-.phs-arrow svg { width:14px; height:14px; }
-.phs-caption { position:absolute; top:50%; right:40px; transform:translateY(-50%); z-index:6; text-align:right; opacity:0; transition:opacity .8s ease .4s, transform .8s ease .4s; transform:translateY(-50%) translateX(20px); }
-.phs-caption.visible { opacity:1; transform:translateY(-50%) translateX(0); }
-.phs-caption-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; display:flex; align-items:center; justify-content:flex-end; gap:8px; }
-.phs-caption-label::after { content:''; width:20px; height:1px; background:var(--gold); }
-.phs-caption-title { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:600; color:rgba(255,255,255,.7); max-width:200px; text-align:right; line-height:1.4; }
-.page-hero-inner { position:relative; z-index:6; padding:60px 0 48px; width:100%; }
-.page-hero-inner .s-inner { max-width:1200px; margin:0 auto; padding:0 40px; }
-@keyframes fade-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-/* PROJECTS HERO BADGE */
-.proj-hero-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(245,200,0,.1); border:1px solid rgba(245,200,0,.3);
-  border-radius:99px; padding:6px 16px; margin-bottom:16px;
-  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--gold);
-  animation:fade-up .8s .2s both;
-}
+@keyframes bracket-pulse { 0%,100% { opacity:.25; } 50% { opacity:.8; } }
+@keyframes fade-up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.proj-hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(245,200,0,.1); border:1px solid rgba(245,200,0,.3); border-radius:99px; padding:6px 16px; margin-bottom:16px; font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
 .phb-dot { width:7px; height:7px; border-radius:50%; background:var(--gold); animation:dot-ping 1.5s ease-in-out infinite; }
-@keyframes dot-ping { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.6);opacity:.4} }
-
-/* Filter bar */
+@keyframes dot-ping { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.6); opacity:.4; } }
 .filter-bar { display:flex; align-items:center; gap:10px; margin-bottom:40px; flex-wrap:wrap; }
 .filter-btn { font-family:var(--font-cond); font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:8px 20px; border-radius:99px; border:1.5px solid var(--border); background:transparent; color:var(--fg); cursor:pointer; transition:all var(--trans); }
 .filter-btn:hover,.filter-btn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
-
-/* Project grid */
 .proj-grid-full { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
 .proj-grid-full .proj-card.feat { grid-column:1/3; height:420px; }
 .proj-grid-full .proj-card { height:280px; }
-
-/* Project stats */
 .proj-stats { display:flex; gap:32px; margin-top:48px; padding:32px; background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); flex-wrap:wrap; }
 .proj-stat { text-align:center; flex:1; min-width:100px; }
 .proj-stat-num { font-family:var(--font-display); font-size:40px; color:var(--gold); line-height:1; margin-bottom:6px; }
 .proj-stat-lbl { font-family:var(--font-cond); font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--gray); }
-
-/* Gallery section */
-.gallery-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px;
-}
-.gallery-item {
-  border-radius: 10px; overflow: hidden; position: relative; cursor: pointer;
-  aspect-ratio: 1; background: var(--card);
-  transition: transform .4s ease, box-shadow .4s ease;
-}
-.gallery-item:hover { transform: scale(1.04); box-shadow: 0 20px 40px rgba(0,0,0,.3); }
-.gallery-item img { width:100%; height:100%; object-fit:cover; transition: transform .6s ease; }
-.gallery-item:hover img { transform: scale(1.08); }
-.gallery-item-overlay {
-  position: absolute; inset: 0; background: rgba(13,27,42,.7);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity .4s ease;
-}
-.gallery-item:hover .gallery-item-overlay { opacity: 1; }
-.gallery-item-overlay svg { width: 28px; height: 28px; color: white; }
-
-/* Lightbox */
-.lightbox {
-  position: fixed; inset: 0; z-index: 9999;
-  background: rgba(0,0,0,.95); backdrop-filter: blur(20px);
-  display: none; align-items: center; justify-content: center;
-}
-.lightbox.open { display: flex; }
-.lightbox-img { max-width: 90vw; max-height: 85vh; border-radius: 12px; object-fit: contain; }
-.lightbox-close {
-  position: absolute; top: 24px; right: 24px;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: white; font-size: 20px; transition: all .3s;
-}
-.lightbox-close:hover { background: var(--gold); color: var(--navy); }
-.lightbox-prev, .lightbox-next {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: white; transition: all .3s;
-}
-.lightbox-prev { left: 24px; }
-.lightbox-next { right: 24px; }
-.lightbox-prev:hover, .lightbox-next:hover { background: var(--gold); color: var(--navy); }
-.lightbox-caption {
-  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600;
-  letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.6);
-  background: rgba(13,27,42,.8); padding: 8px 20px; border-radius: 99px;
-  white-space: nowrap;
-}
-
-@media(max-width:900px) { .proj-grid-full{grid-template-columns:1fr 1fr} .proj-grid-full .proj-card.feat{grid-column:1/3;height:320px} .proj-grid-full .proj-card{height:240px} .gallery-grid{grid-template-columns:repeat(2,1fr)} .phs-caption{display:none} }
-@media(max-width:600px) { .proj-grid-full{grid-template-columns:1fr} .proj-grid-full .proj-card.feat{grid-column:auto;height:260px} .proj-grid-full .proj-card{height:220px} .gallery-grid{grid-template-columns:repeat(2,1fr)} .page-hero{min-height:460px} }
+.gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+.gallery-item { border-radius:10px; overflow:hidden; position:relative; cursor:pointer; aspect-ratio:1; background:var(--card); transition:transform .4s ease, box-shadow .4s ease; }
+.gallery-item:hover { transform:scale(1.04); box-shadow:0 20px 40px rgba(0,0,0,.3); }
+.gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+.gallery-item:hover img { transform:scale(1.08); }
+.gallery-item-overlay { position:absolute; inset:0; background:rgba(13,27,42,.7); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .4s ease; }
+.gallery-item:hover .gallery-item-overlay { opacity:1; }
+.gallery-item-overlay svg { width:28px; height:28px; color:white; }
+.lightbox { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.95); backdrop-filter:blur(20px); display:none; align-items:center; justify-content:center; }
+.lightbox.open { display:flex; }
+.lightbox-img { max-width:90vw; max-height:85vh; border-radius:12px; object-fit:contain; }
+.lightbox-close { position:absolute; top:24px; right:24px; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; cursor:pointer; color:white; font-size:20px; transition:all .3s; }
+.lightbox-close:hover { background:var(--gold); color:var(--navy); }
+.lightbox-prev, .lightbox-next { position:absolute; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; cursor:pointer; color:white; transition:all .3s; }
+.lightbox-prev { left:24px; }
+.lightbox-next { right:24px; }
+.lightbox-prev:hover, .lightbox-next:hover { background:var(--gold); color:var(--navy); }
+.lightbox-caption { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.6); background:rgba(13,27,42,.8); padding:8px 20px; border-radius:99px; white-space:nowrap; }
+@media(max-width:900px) { .proj-grid-full { grid-template-columns:1fr 1fr; } .proj-grid-full .proj-card.feat { grid-column:1/3; height:320px; } .proj-grid-full .proj-card { height:240px; } .gallery-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:600px) { .page-hero { min-height:460px; } .proj-grid-full { grid-template-columns:1fr; } .proj-grid-full .proj-card.feat { grid-column:auto; height:260px; } .proj-grid-full .proj-card { height:220px; } .gallery-grid { grid-template-columns:repeat(2,1fr); } }
 </style>
 </head>
 <body data-page="projects" data-theme="light">
-<div class="cursor" id="cur"></div>
-<div class="cursor-ring" id="cur-ring"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-stripe"></div>
-  <div class="nav-shell">
-    <div class="nav-orb nav-orb-1"></div><div class="nav-orb nav-orb-2"></div><div class="nav-orb nav-orb-3"></div>
-    <div class="nav-inner">
-      <a class="nav-logo" href="home.html">
-        <div class="nav-logo-mark"><div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div><img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra"></div>
-        <div class="nav-brand-text"><strong>Flowchip Infra Pvt Ltd</strong><em></em></div>
-      </a>
-      <div class="nav-center">
-        <a class="nav-link" href="home.html">Home</a><a class="nav-link" href="services.html">Services</a><a class="nav-link" href="about.html">About</a><a class="nav-link active" href="projects.html">Projects</a><a class="nav-link" href="process.html">Process</a>
-      </div>
-      <div class="nav-right">
-        <button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme"><span class="ntb-icon" data-theme-icon>☀</span><span data-theme-label>Dark Mode</span></button>
-        <a class="nav-cta-btn" href="contact.html"><span>Contact Us</span><svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()"><span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span></button>
-      </div>
-    </div>
-  </div>
-</nav>
-<div class="mob-nav" id="mob-menu">
-  <a href="home.html" onclick="closeMob()">Home</a><a href="services.html" onclick="closeMob()">Services</a><a href="about.html" onclick="closeMob()">About</a><a href="projects.html" onclick="closeMob()">Projects</a><a href="process.html" onclick="closeMob()">Process</a><a href="contact.html" onclick="closeMob()">Contact</a>
-  <div class="mob-contact-row"><a href="tel:+917254000010" onclick="closeMob()">72540 00010</a><a href="contact.html" onclick="closeMob()">Get a Quote →</a></div>
-  <span class="mob-close-hint">Press Esc or tap link to close</span>
-</div>
-
-
-
-
-<!-- PAGE HERO WITH SLIDER (uses projectSlides) -->
-<div class="page-hero" id="proj-hero">
-  <div class="phs-track" id="proj-phs-track"></div>
-  <div class="phs-overlay"></div>
-  <div class="phs-overlay-color"></div>
-  <div class="phs-scanlines"></div>
-  <div class="phs-grid"></div>
-  <div class="phs-shapes"><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div></div>
-  <div class="phs-sweep"></div>
-  <div class="phs-brackets"><div class="phs-bracket tl"></div><div class="phs-bracket tr"></div><div class="phs-bracket bl"></div><div class="phs-bracket br"></div></div>
-  <div class="phs-counter" id="proj-counter"></div>
-  <div class="phs-caption" id="proj-caption">
-    <div class="phs-caption-label">Portfolio</div>
-    <div class="phs-caption-title" id="proj-caption-title">Featured Project</div>
-  </div>
-  <div class="phs-progress"><div class="phs-progress-fill" id="proj-progress"></div></div>
-  <div class="phs-dots" id="proj-dots"></div>
-  <div class="phs-arrows">
-    <div class="phs-arrow" id="proj-prev"><svg viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div class="phs-arrow" id="proj-next"><svg viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  </div>
-  <div class="page-hero-inner">
-    <div class="s-inner">
-      <div class="proj-hero-badge"><div class="phb-dot"></div>Portfolio</div>
-      <div class="breadcrumb" style="margin-bottom:10px"><a href="home.html">Home</a> <span>/</span> <span>Projects</span></div>
-      <h2 class="s-title" style="animation:fade-up .9s .3s both">Featured <span class="dim">Projects</span></h2>
-      <p class="s-sub" style="animation:fade-up .9s .5s both;max-width:600px">Landmark works that define our capabilities and commitment to quality construction across Bihar and beyond.</p>
-    </div>
-  </div>
-</div>
-
-<!-- PROJECTS SECTION -->
-<section id="projects" style="padding:80px 0 60px">
-  <div class="s-inner">
-    <div class="filter-bar reveal">
-      <button class="filter-btn active" onclick="filterProj(this,'all')">All Projects</button>
-      <button class="filter-btn" onclick="filterProj(this,'civil')">Civil</button>
-      <button class="filter-btn" onclick="filterProj(this,'architecture')">Architecture</button>
-      <button class="filter-btn" onclick="filterProj(this,'interior')">Interior</button>
-      <button class="filter-btn" onclick="filterProj(this,'infrastructure')">Infrastructure</button>
-    </div>
-    <div class="proj-grid-full" id="proj-grid">
-      <div class="proj-card feat reveal" data-cat="civil">
-        <div class="proj-img" data-project-slot="0"></div>
-        <div class="proj-over"></div>
-        <div class="proj-tag-top">Featured</div>
-        <div class="proj-content"><div class="proj-cat">Civil Infrastructure</div><h3>Institutional Campus Development</h3><p>Multi-phase construction for major institutional clients including structural civil works and full infrastructure systems. Delivered on schedule across three build phases.</p></div>
-        <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="proj-card reveal rd1" data-cat="architecture">
-        <div class="proj-img" data-project-slot="1"></div>
-        <div class="proj-over"></div><div class="proj-tag-top">Architecture</div>
-        <div class="proj-content"><div class="proj-cat">Exterior Design</div><h3>Commercial Facade System</h3><p>Modern envelope with integrated landscaping.</p></div>
-        <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="proj-card reveal rd2" data-cat="infrastructure">
-        <div class="proj-img" data-project-slot="2"></div>
-        <div class="proj-over"></div><div class="proj-tag-top">Infrastructure</div>
-        <div class="proj-content"><div class="proj-cat">Park Construction</div><h3>Urban Community Park</h3><p>Recreational infrastructure with sustainable design elements.</p></div>
-        <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="proj-card reveal rd1" data-cat="interior">
-        <div class="proj-img" data-project-slot="3"></div>
-        <div class="proj-over"></div><div class="proj-tag-top">Interior</div>
-        <div class="proj-content"><div class="proj-cat">Interior Design</div><h3>Office Interior Fit-out</h3><p>High-end interior for a premier government institution.</p></div>
-        <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="proj-card reveal rd2" data-cat="architecture">
-        <div class="proj-img" data-project-slot="4"></div>
-        <div class="proj-over"></div><div class="proj-tag-top">Architecture</div>
-        <div class="proj-content"><div class="proj-cat">Residential</div><h3>Residential Complex</h3><p>Premium housing with modern architectural detailing.</p></div>
-        <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="proj-card reveal" data-cat="civil">
-        <div class="proj-img" data-project-slot="5"></div>
-        <div class="proj-over"></div><div class="proj-tag-top">Civil</div>
-        <div class="proj-content"><div class="proj-cat">Civil Engineering</div><h3>Structural Works Package</h3><p>Major structural civil package delivered with strict quality and schedule control.</p></div>
-        <div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      </div>
-    </div>
-
-    <!-- PROJECT STATS -->
-    <div class="proj-stats reveal">
-      <div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="50" data-suffix="+">50+</span></div><div class="proj-stat-lbl">Projects Completed</div></div>
-      <div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="7" data-suffix="+">7+</span></div><div class="proj-stat-lbl">Years Active</div></div>
-      <div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="3" data-suffix="">3</span></div><div class="proj-stat-lbl">National Clients</div></div>
-      <div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="5" data-suffix="">5</span></div><div class="proj-stat-lbl">Core Services</div></div>
-      <div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="100" data-suffix="%">100%</span></div><div class="proj-stat-lbl">On-Time Delivery</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PHOTO GALLERY -->
-<section style="padding:60px 0 100px;background:var(--off)">
-  <div class="s-inner">
-    <div class="s-eye reveal"><span>Photo Gallery</span></div>
-    <h2 class="s-title reveal">Site <span class="dim">Photography</span></h2>
-    <p class="s-sub reveal">Real images from our project sites — unfiltered, on-site, and built with pride.</p>
-    <div class="gallery-grid reveal" id="gallery-grid"></div>
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-close" id="lb-close">✕</div>
-  <div class="lightbox-prev" id="lb-prev"><svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-  <img class="lightbox-img" id="lb-img" src="" alt="">
-  <div class="lightbox-next" id="lb-next"><svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-  <div class="lightbox-caption" id="lb-caption"></div>
-</div>
-
-<section class="cta-band">
-  <div class="cta-panel reveal">
-    <div><h3>Have a project brief in mind already?</h3><p>Share the site, timeline, and scope. The team can help turn it into a realistic execution plan backed by engineering and design coordination.</p></div>
-    <div class="cta-panel-actions"><a href="contact.html" class="btn-p">Discuss Your Brief</a><a href="services.html" class="btn-o">Match the Right Service</a></div>
-  </div>
-</section>
-
-<!-- FOOTER (shared) -->
+<div class="cursor" id="cur"></div><div class="cursor-ring" id="cur-ring"></div>
+<nav id="navbar"><div class="nav-stripe"></div><div class="nav-shell"><div class="nav-orb nav-orb-1"></div><div class="nav-orb nav-orb-2"></div><div class="nav-orb nav-orb-3"></div><div class="nav-inner"><a class="nav-logo" href="home.html"><div class="nav-logo-mark"><div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div><img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra full logo"></div><div class="nav-brand-text"><strong>Flowchip Infra Pvt Ltd</strong><em></em></div></a><div class="nav-center"><a class="nav-link" href="home.html">Home</a><a class="nav-link" href="services.html">Services</a><a class="nav-link" href="about.html">About</a><a class="nav-link active" href="projects.html">Projects</a><a class="nav-link" href="process.html">Process</a></div><div class="nav-right"><button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme"><span class="ntb-icon" data-theme-icon>&#9728;</span><span data-theme-label>Dark Mode</span></button><a class="nav-cta-btn" href="contact.html"><span>Contact Us</span><svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()"><span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span></button></div></div></div></div></nav>
+<div class="mob-nav" id="mob-menu"><a href="home.html" onclick="closeMob()">Home</a><a href="services.html" onclick="closeMob()">Services</a><a href="about.html" onclick="closeMob()">About</a><a href="projects.html" onclick="closeMob()">Projects</a><a href="process.html" onclick="closeMob()">Process</a><a href="contact.html" onclick="closeMob()">Contact</a><div class="mob-contact-row"><a href="tel:+917254000010" onclick="closeMob()">72540 00010</a><a href="contact.html" onclick="closeMob()">Get a Quote</a></div><span class="mob-close-hint">Press Esc or tap link to close</span></div>
+<div class="page-hero page-hero-single" id="proj-hero"><div class="page-hero-grid"></div><div class="phs-scanlines"></div><div class="phs-shapes"><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div></div><div class="phs-sweep"></div><div class="phs-brackets"><div class="phs-bracket tl"></div><div class="phs-bracket tr"></div><div class="phs-bracket bl"></div><div class="phs-bracket br"></div></div><div class="page-hero-shell"><div class="page-hero-copy"><div class="proj-hero-badge"><div class="phb-dot"></div>Portfolio</div><div class="breadcrumb" style="margin-bottom:10px"><a href="home.html">Home</a><span>/</span><span>Projects</span></div><h2 class="s-title" style="animation:fade-up .9s .3s both">Featured <span class="dim">Projects</span></h2><p class="s-sub" style="animation:fade-up .9s .5s both;max-width:600px">Landmark works that define our capabilities and commitment to quality construction across Bihar and beyond.</p><div class="page-hero-meta" style="animation:fade-up .9s .6s both"><span class="page-hero-pill">Institutional Works</span><span class="page-hero-pill">Civil Infrastructure</span><span class="page-hero-pill">Architecture & Interiors</span></div><div class="page-hero-actions" style="animation:fade-up .9s .75s both"><a href="contact.html" class="btn-primary"><span>Discuss Your Brief</span></a><a href="services.html" class="btn-secondary">Match Services</a></div></div><div class="page-hero-visual" style="animation:fade-up .95s .35s both"><div class="page-hero-frame"><img src="original images/WhatsApp Image 2026-04-28 at 3.12.41 PM.jpeg" alt="Flowchip Infra featured project"></div><div class="page-hero-accent">Live site portfolio</div><div class="page-hero-note"><span class="page-hero-note-label">Project type</span><strong>Institutional delivery</strong><p>Real site work spanning structural, infrastructure, and finishing scopes.</p></div></div></div></div>
+<section id="projects" style="padding:80px 0 60px"><div class="s-inner"><div class="filter-bar reveal"><button class="filter-btn active" onclick="filterProj(this,'all')">All Projects</button><button class="filter-btn" onclick="filterProj(this,'civil')">Civil</button><button class="filter-btn" onclick="filterProj(this,'architecture')">Architecture</button><button class="filter-btn" onclick="filterProj(this,'interior')">Interior</button><button class="filter-btn" onclick="filterProj(this,'infrastructure')">Infrastructure</button></div><div class="proj-grid-full" id="proj-grid"><div class="proj-card feat reveal" data-cat="civil"><div class="proj-img" data-project-slot="0"></div><div class="proj-over"></div><div class="proj-tag-top">Featured</div><div class="proj-content"><div class="proj-cat">Civil Infrastructure</div><h3>Institutional Campus Development</h3><p>Multi-phase construction for institutional clients including structural civil works and infrastructure systems.</p></div><div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="proj-card reveal rd1" data-cat="architecture"><div class="proj-img" data-project-slot="1"></div><div class="proj-over"></div><div class="proj-tag-top">Architecture</div><div class="proj-content"><div class="proj-cat">Exterior Design</div><h3>Commercial Facade System</h3><p>Modern envelope with integrated landscape planning.</p></div><div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="proj-card reveal rd2" data-cat="infrastructure"><div class="proj-img" data-project-slot="2"></div><div class="proj-over"></div><div class="proj-tag-top">Infrastructure</div><div class="proj-content"><div class="proj-cat">Park Construction</div><h3>Urban Community Park</h3><p>Recreational infrastructure with sustainable design elements.</p></div><div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="proj-card reveal rd1" data-cat="interior"><div class="proj-img" data-project-slot="3"></div><div class="proj-over"></div><div class="proj-tag-top">Interior</div><div class="proj-content"><div class="proj-cat">Interior Design</div><h3>Office Interior Fit-out</h3><p>High-end interior fit-out with strong execution control.</p></div><div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="proj-card reveal rd2" data-cat="architecture"><div class="proj-img" data-project-slot="4"></div><div class="proj-over"></div><div class="proj-tag-top">Architecture</div><div class="proj-content"><div class="proj-cat">Residential</div><h3>Residential Complex</h3><p>Premium housing with modern architectural detailing.</p></div><div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="proj-card reveal" data-cat="civil"><div class="proj-img" data-project-slot="5"></div><div class="proj-over"></div><div class="proj-tag-top">Civil</div><div class="proj-content"><div class="proj-cat">Civil Engineering</div><h3>Structural Works Package</h3><p>Major structural package delivered with quality and schedule control.</p></div><div class="proj-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div></div></div><div class="proj-stats reveal"><div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="50" data-suffix="+">50+</span></div><div class="proj-stat-lbl">Projects Completed</div></div><div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="7" data-suffix="+">7+</span></div><div class="proj-stat-lbl">Years Active</div></div><div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="3" data-suffix="">3</span></div><div class="proj-stat-lbl">National Clients</div></div><div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="5" data-suffix="">5</span></div><div class="proj-stat-lbl">Core Services</div></div><div class="proj-stat"><div class="proj-stat-num"><span class="cnt2" data-target="100" data-suffix="%">100%</span></div><div class="proj-stat-lbl">On-Time Delivery</div></div></div></div></section>
+<section style="padding:60px 0 100px;background:var(--off)"><div class="s-inner"><div class="s-eye reveal"><span>Photo Gallery</span></div><h2 class="s-title reveal">Site <span class="dim">Photography</span></h2><p class="s-sub reveal">Real images from project sites, captured during live execution and handover stages.</p><div class="gallery-grid reveal" id="gallery-grid"></div></div></section>
+<div class="lightbox" id="lightbox"><div class="lightbox-close" id="lb-close">×</div><div class="lightbox-prev" id="lb-prev"><svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><img class="lightbox-img" id="lb-img" src="" alt=""><div class="lightbox-next" id="lb-next"><svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lightbox-caption" id="lb-caption"></div></div>
+<section class="cta-band"><div class="cta-panel reveal"><div><h3>Have a project brief in mind already?</h3><p>Share the site, timeline, and scope. The team can turn it into a realistic execution plan backed by engineering and design coordination.</p></div><div class="cta-panel-actions"><a href="contact.html" class="btn-p">Discuss Your Brief</a><a href="services.html" class="btn-o">Match the Right Service</a></div></div></section>
 <div data-shared-footer></div>
+<script>(function(){try{var xhr=new XMLHttpRequest();xhr.open('GET','footer.html',false);xhr.send(null);if(!(xhr.status===200||xhr.status===0)) throw new Error('HTTP '+xhr.status);var doc=new DOMParser().parseFromString(xhr.responseText,'text/html');doc.querySelectorAll('link[rel="stylesheet"], style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'shared-footer-style-'+idx:'shared-footer-link-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-shared-footer-marker="'+marker+'"]')) return;var clone=node.cloneNode(true);clone.setAttribute('data-shared-footer-marker',marker);document.head.appendChild(clone);});var footer=doc.querySelector('#site-footer');var holder=document.querySelector('[data-shared-footer]');if(holder&&footer){holder.replaceWith(footer);}doc.querySelectorAll('script').forEach(function(node){var script=document.createElement('script');if(node.src){script.src=node.src;}else{script.textContent=node.textContent;}document.body.appendChild(script);});}catch(e){console.warn('Shared footer load failed',e);}})();</script>
 <script>
-  (function(){
-    try{
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET','footer.html',false);
-      xhr.send(null);
-      if(!(xhr.status===200 || xhr.status===0)) throw new Error('HTTP '+xhr.status);
-      var temp=document.createElement('div');
-      temp.innerHTML=xhr.responseText;
-      var footer=temp.firstElementChild;
-      var holder=document.querySelector('[data-shared-footer]');
-      if(holder && footer){ holder.replaceWith(footer); }
-    }catch(e){ console.warn('Shared footer load failed',e); }
-  })();
-</script>
-
-<script>
-window.projectSlides = [
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.11.07 PM.jpeg", alt:"Project 1", caption:"Institutional Campus Works" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.32 PM.jpeg", alt:"Project 2", caption:"Campus Development" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.34 PM.jpeg", alt:"Project 3", caption:"Infrastructure Delivery" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.39 PM.jpeg", alt:"Project 4", caption:"Urban Development" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.41 PM.jpeg", alt:"Project 5", caption:"Institutional Works" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.13.04 PM.jpeg", alt:"Project 6", caption:"Civil Infrastructure" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.13.28 PM.jpeg", alt:"Project 7", caption:"Structural Works" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.13.56 PM.jpeg", alt:"Project 8", caption:"Site Works" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.14.27 PM.jpeg", alt:"Project 9", caption:"Industrial Works" },
-  ];
+window.projectSlides=[
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.11.07 PM.jpeg", alt:"Project 1", caption:"Institutional Campus Works" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.12.32 PM.jpeg", alt:"Project 2", caption:"Campus Development" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.12.34 PM.jpeg", alt:"Project 3", caption:"Infrastructure Delivery" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.12.39 PM.jpeg", alt:"Project 4", caption:"Urban Development" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.12.41 PM.jpeg", alt:"Project 5", caption:"Institutional Works" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.13.04 PM.jpeg", alt:"Project 6", caption:"Civil Infrastructure" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.13.28 PM.jpeg", alt:"Project 7", caption:"Structural Works" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.13.56 PM.jpeg", alt:"Project 8", caption:"Site Works" },
+{ src:"original images/WhatsApp Image 2026-04-28 at 3.14.27 PM.jpeg", alt:"Project 9", caption:"Industrial Works" }
+];
 </script>
 <script src="assets/site.js"></script>
-<script src="assets/hero-slider.js"></script>
 <script>
-/* Hero slider — use project slides */
-initPageHeroSlider({
-  trackId:'proj-phs-track', dotsId:'proj-dots', counterId:'proj-counter',
-  progressId:'proj-progress', prevId:'proj-prev', nextId:'proj-next',
-  captionId:'proj-caption', captionTitleId:'proj-caption-title',
-  slides: window.projectSlides.slice(0,6), interval: 4500
-});
-
-/* Filter */
-function filterProj(btn, cat){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#proj-grid .proj-card').forEach(card=>{
-    if(cat==='all'||card.dataset.cat===cat){
-      card.style.display=''; card.style.opacity='1';
-    } else {
-      card.style.opacity='0';
-      setTimeout(()=>{ if(card.dataset.cat!==cat&&cat!=='all') card.style.display='none'; },300);
-    }
-  });
-}
-
-/* Build gallery */
-(function(){
-  const grid = document.getElementById('gallery-grid');
-  if(!grid || !window.projectSlides) return;
-  window.projectSlides.forEach((s, i) => {
-    const item = document.createElement('div');
-    item.className = 'gallery-item';
-    item.innerHTML = `
-      <img src="${s.src}" alt="${s.alt}" loading="lazy">
-      <div class="gallery-item-overlay">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-    `;
-    item.addEventListener('click', () => openLightbox(i));
-    grid.appendChild(item);
-  });
-})();
-
-/* Lightbox */
-let lbIndex = 0;
-function openLightbox(i){
-  lbIndex = i;
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lb-img');
-  const cap = document.getElementById('lb-caption');
-  lb.classList.add('open');
-  img.src = window.projectSlides[i].src;
-  img.alt = window.projectSlides[i].alt;
-  cap.textContent = window.projectSlides[i].caption || '';
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function lbNav(dir){
-  lbIndex = (lbIndex + dir + window.projectSlides.length) % window.projectSlides.length;
-  openLightbox(lbIndex);
-}
-document.getElementById('lb-close').addEventListener('click', closeLightbox);
-document.getElementById('lb-prev').addEventListener('click', () => lbNav(-1));
-document.getElementById('lb-next').addEventListener('click', () => lbNav(1));
-document.getElementById('lightbox').addEventListener('click', e => { if(e.target === e.currentTarget) closeLightbox(); });
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowLeft')  lbNav(-1);
-  if(e.key === 'ArrowRight') lbNav(1);
-});
+function filterProj(btn, cat){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#proj-grid .proj-card').forEach(card=>{if(cat==='all'||card.dataset.cat===cat){card.style.display='';setTimeout(()=>{card.style.opacity='1';},10);}else{card.style.opacity='0';setTimeout(()=>{if(card.dataset.cat!==cat&&cat!=='all') card.style.display='none';},250);}});}
+(function(){document.querySelectorAll('[data-project-slot]').forEach((el,i)=>{const slide=window.projectSlides[i];if(slide){el.style.backgroundImage=`url('${slide.src}')`;}});const grid=document.getElementById('gallery-grid');if(!grid) return;window.projectSlides.forEach((s,i)=>{const item=document.createElement('div');item.className='gallery-item';item.innerHTML=`<img src="${s.src}" alt="${s.alt}" loading="lazy"><div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;item.addEventListener('click',()=>openLightbox(i));grid.appendChild(item);});})();
+let lbIndex=0;function openLightbox(i){lbIndex=i;const lb=document.getElementById('lightbox');const img=document.getElementById('lb-img');const cap=document.getElementById('lb-caption');lb.classList.add('open');img.src=window.projectSlides[i].src;img.alt=window.projectSlides[i].alt;cap.textContent=window.projectSlides[i].caption||'';document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lbNav(dir){lbIndex=(lbIndex+dir+window.projectSlides.length)%window.projectSlides.length;openLightbox(lbIndex);}document.getElementById('lb-close').addEventListener('click',closeLightbox);document.getElementById('lb-prev').addEventListener('click',()=>lbNav(-1));document.getElementById('lb-next').addEventListener('click',()=>lbNav(1));document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox') closeLightbox();});document.addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('open')) return;if(e.key==='Escape') closeLightbox();if(e.key==='ArrowLeft') lbNav(-1);if(e.key==='ArrowRight') lbNav(1);});
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
 

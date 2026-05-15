@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,137 +6,42 @@
 <title>Flowchip Infra | Contact</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<style>
+.page-hero { position:relative; min-height:580px; overflow:hidden; }
+.phs-scanlines { position:absolute; inset:0; z-index:2; pointer-events:none; background:repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(43,142,199,.016) 3px, rgba(43,142,199,.016) 4px); }
+.phs-shapes { position:absolute; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
+.phs-shape { position:absolute; border:1px solid rgba(245,200,0,.2); animation:shape-float 22s linear infinite; }
+.phs-shape:nth-child(1) { width:44px; height:44px; top:18%; right:14%; border-radius:6px; animation-duration:20s; }
+.phs-shape:nth-child(2) { width:26px; height:26px; top:60%; right:24%; border-radius:50%; border-color:rgba(43,142,199,.25); animation-duration:17s; animation-delay:-5s; }
+.phs-shape:nth-child(3) { width:80px; height:2px; top:32%; left:6%; border:none; background:linear-gradient(90deg,transparent,rgba(245,200,0,.35),transparent); animation-duration:26s; animation-delay:-11s; }
+.phs-shape:nth-child(4) { width:18px; height:18px; bottom:32%; left:18%; border-radius:4px; border-color:rgba(245,200,0,.22); animation-duration:15s; animation-delay:-3s; }
+.phs-shape:nth-child(5) { width:60px; height:60px; top:10%; left:40%; border-radius:50%; border-color:rgba(43,142,199,.1); border-width:2px; animation-duration:32s; animation-delay:-8s; }
+@keyframes shape-float { 0%,100% { transform:translateY(0) rotate(0deg); opacity:.5; } 33% { transform:translateY(-24px) rotate(120deg); opacity:1; } 66% { transform:translateY(-12px) rotate(240deg); opacity:.7; } }
+.phs-sweep { position:absolute; inset:0; z-index:3; pointer-events:none; background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.04) 50%, transparent 70%); background-size:300% 100%; animation:sweep-move 8s ease-in-out infinite; }
+@keyframes sweep-move { 0%,100% { background-position:-100% 0; } 50% { background-position:200% 0; } }
+.phs-brackets { position:absolute; inset:24px; z-index:4; pointer-events:none; }
+.phs-bracket { position:absolute; width:28px; height:28px; border-color:rgba(245,200,0,.4); border-style:solid; animation:bracket-pulse 3s ease-in-out infinite; }
+.phs-bracket.tl { top:0; left:0; border-width:2px 0 0 2px; border-radius:4px 0 0 0; }
+.phs-bracket.tr { top:0; right:0; border-width:2px 2px 0 0; border-radius:0 4px 0 0; animation-delay:.5s; }
+.phs-bracket.bl { bottom:0; left:0; border-width:0 0 2px 2px; border-radius:0 0 0 4px; animation-delay:1s; }
+.phs-bracket.br { bottom:0; right:0; border-width:0 2px 2px 0; border-radius:0 0 4px 0; animation-delay:1.5s; }
+@keyframes bracket-pulse { 0%,100% { opacity:.25; } 50% { opacity:.8; } }
+@keyframes fade-up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.contact-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(43,142,199,.1); border:1px solid rgba(43,142,199,.3); border-radius:99px; padding:6px 16px; margin-bottom:16px; font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--sky); }
+.contact-badge-dot { width:7px; height:7px; border-radius:50%; background:var(--sky); animation:dot-ping 1.5s ease-in-out infinite; }
+@keyframes dot-ping { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.6); opacity:.4; } }
+.contact-grid { align-items:stretch; }
+</style>
 </head>
 <body data-page="contact" data-theme="light">
-<div class="cursor" id="cur"></div>
-<div class="cursor-ring" id="cur-ring"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-stripe"></div>
-  <div class="nav-shell">
-    <div class="nav-orb nav-orb-1"></div>
-    <div class="nav-orb nav-orb-2"></div>
-    <div class="nav-orb nav-orb-3"></div>
-
-    <div class="nav-inner">
-
-      <a class="nav-logo" href="home.html">
-        <div class="nav-logo-mark">
-          <div class="nlm-orbit"></div>
-          <div class="nlm-ring"></div>
-          <div class="nlm-ping"></div>
-          <img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra">
-        </div>
-        <div class="nav-brand-text">
-          <strong>Flowchip Infra Pvt Ltd</strong>
-          <em></em>
-        </div>
-      </a>
-
-      <div class="nav-center">
-        <a class="nav-link" href="home.html">Home</a>
-        <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="projects.html">Projects</a>
-        <a class="nav-link" href="process.html">Process</a>
-      </div>
-
-      <div class="nav-right">
-        <button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme">
-          <span class="ntb-icon" data-theme-icon>?</span>
-          <span data-theme-label>Dark Mode</span>
-        </button>
-        <a class="nav-cta-btn" href="contact.html">
-          <span>Contact Us</span>
-          <svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()">
-          <span class="nhb-line"></span>
-          <span class="nhb-line"></span>
-          <span class="nhb-line"></span>
-        </button>
-      </div>
-
-    </div>
-  </div>
-</nav>
-<div class="mob-nav" id="mob-menu">
-  <a href="home.html" onclick="closeMob()">Home</a>
-  <a href="services.html" onclick="closeMob()">Services</a>
-  <a href="about.html" onclick="closeMob()">About</a>
-  <a href="projects.html" onclick="closeMob()">Projects</a>
-  <a href="process.html" onclick="closeMob()">Process</a>
-  <a href="contact.html" onclick="closeMob()">Contact</a>
-  <div class="mob-contact-row">
-    <a href="tel:+917254000010" onclick="closeMob()">72540 00010</a>
-    <a href="contact.html" onclick="closeMob()">Get a Quote ?</a>
-  </div>
-  <span class="mob-close-hint">Press Esc or tap link to close</span>
-</div>
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-canvas-wrap"><canvas id="contact-canvas"></canvas></div>
-  <div class="s-inner">
-    <div class="s-eye reveal"><span>Get In Touch</span></div>
-    <h2 class="s-title reveal">Start Your <span class="dim">Project</span></h2>
-    <div class="contact-grid">
-      <div class="reveal-left">
-        <p style="font-size:15px;color:#555;line-height:1.85;font-weight:300;margin-bottom:32px">Ready to build something exceptional? Our team responds within 24 hours to all enquiries.</p>
-        <div class="c-info">
-          <div class="c-item"><div class="c-icon">??</div><div class="c-text"><label>Address</label><p>2554, Gandhi Colony, Ashiyana Nagar<br>Patna � 800025, Bihar, India</p></div></div>
-          <div class="c-item"><div class="c-icon">??</div><div class="c-text"><label>Phone</label><p><a href="tel:+917254000010">+91 72540 00010</a><br><a href="tel:+919102434888">+91 91024 34888</a></p></div></div>
-          <div class="c-item"><div class="c-icon">??</div><div class="c-text"><label>Email</label><p><a href="mailto:Flowchipinfra13@gmail.com">Flowchipinfra13@gmail.com</a></p></div></div>
-          <div class="c-item"><div class="c-icon">??</div><div class="c-text"><label>Area of Work</label><p>Civil &nbsp;�&nbsp; Architecture &nbsp;�&nbsp; Interior</p></div></div>
-        </div>
-      </div>
-      <div class="reveal-right">
-        <form class="c-form" id="contact-form" onsubmit="submitForm(event)" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="hidden_iframe" novalidate data-google-form-action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" data-form-pending-text="Google Form endpoint pending. Replace YOUR_FORM_ID and entry field names with your Google Form IDs to enable submissions.">
-          <div class="f-row">
-            <div class="f-grp"><label for="contact-name">Full Name</label><input id="contact-name" name="entry.0000000000" type="text" placeholder="Your full name" required></div>
-            <div class="f-grp"><label for="contact-phone">Phone</label><input id="contact-phone" name="entry.0000000001" type="tel" placeholder="+91 XXXXX XXXXX" pattern="[0-9+\-\s]{10,15}" required></div>
-          </div>
-          <div class="f-grp"><label for="contact-email">Email</label><input id="contact-email" name="entry.0000000002" type="email" placeholder="your@email.com" required></div>
-          <div class="f-grp"><label for="contact-service">Service Required</label>
-            <select id="contact-service" name="entry.0000000003" required><option value="">Select a service</option><option>Civil Engineering</option><option>Architecture &amp; Design</option><option>Interior Works</option><option>Exterior Design</option><option>Park Construction</option></select>
-          </div>
-          <div class="f-grp"><label for="contact-details">Project Details</label><textarea id="contact-details" name="entry.0000000004" placeholder="Describe your project, location, timeline..." required></textarea></div>
-          <button type="submit" class="btn-p" style="align-self:flex-start">Send Enquiry &rarr;</button>
-          <div class="f-success" id="f-success">Thank you. Your enquiry has been submitted.</div>
-        </form>
-            <iframe name="hidden_iframe" style="display:none"></iframe>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- FOOTER (shared) -->
+<div class="cursor" id="cur"></div><div class="cursor-ring" id="cur-ring"></div>
+<nav id="navbar"><div class="nav-stripe"></div><div class="nav-shell"><div class="nav-orb nav-orb-1"></div><div class="nav-orb nav-orb-2"></div><div class="nav-orb nav-orb-3"></div><div class="nav-inner"><a class="nav-logo" href="home.html"><div class="nav-logo-mark"><div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div><img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra full logo"></div><div class="nav-brand-text"><strong>Flowchip Infra Pvt Ltd</strong><em></em></div></a><div class="nav-center"><a class="nav-link" href="home.html">Home</a><a class="nav-link" href="services.html">Services</a><a class="nav-link" href="about.html">About</a><a class="nav-link" href="projects.html">Projects</a><a class="nav-link" href="process.html">Process</a></div><div class="nav-right"><button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme"><span class="ntb-icon" data-theme-icon>&#9728;</span><span data-theme-label>Dark Mode</span></button><a class="nav-cta-btn" href="contact.html"><span>Contact Us</span><svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()"><span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span></button></div></div></div></div></nav>
+<div class="mob-nav" id="mob-menu"><a href="home.html" onclick="closeMob()">Home</a><a href="services.html" onclick="closeMob()">Services</a><a href="about.html" onclick="closeMob()">About</a><a href="projects.html" onclick="closeMob()">Projects</a><a href="process.html" onclick="closeMob()">Process</a><a href="contact.html" onclick="closeMob()">Contact</a><div class="mob-contact-row"><a href="tel:+917254000010" onclick="closeMob()">72540 00010</a><a href="contact.html" onclick="closeMob()">Get a Quote</a></div><span class="mob-close-hint">Press Esc or tap link to close</span></div>
+<div class="page-hero page-hero-single" id="contact-hero"><div class="page-hero-grid"></div><div class="phs-scanlines"></div><div class="phs-shapes"><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div></div><div class="phs-sweep"></div><div class="phs-brackets"><div class="phs-bracket tl"></div><div class="phs-bracket tr"></div><div class="phs-bracket bl"></div><div class="phs-bracket br"></div></div><div class="page-hero-shell"><div class="page-hero-copy"><div class="contact-badge"><div class="contact-badge-dot"></div>Get In Touch</div><div class="breadcrumb" style="margin-bottom:10px"><a href="home.html">Home</a><span>/</span><span>Contact</span></div><h2 class="s-title" style="animation:fade-up .9s .3s both">Start Your <span class="dim">Project</span></h2><p class="s-sub" style="animation:fade-up .9s .5s both;max-width:600px">Share the site, scope, and timeline. The team will help shape a practical delivery path and respond within 24 hours.</p><div class="page-hero-meta" style="animation:fade-up .9s .6s both"><span class="page-hero-pill">Fast Response</span><span class="page-hero-pill">Patna Office</span><span class="page-hero-pill">Civil + Architecture + Interior</span></div><div class="page-hero-actions" style="animation:fade-up .9s .75s both"><a href="#contact" class="btn-primary"><span>Send Enquiry</span></a><a href="tel:+917254000010" class="btn-secondary">Call Now</a></div></div><div class="page-hero-visual" style="animation:fade-up .95s .35s both"><div class="page-hero-frame"><img src="images/interior (2).jpeg" alt="Flowchip Infra contact hero"></div><div class="page-hero-accent">Project enquiries</div><div class="page-hero-note"><span class="page-hero-note-label">Reach us directly</span><strong>72540 00010</strong><p>Discuss your requirement, timeline, and preferred service mix with the team.</p></div></div></div></div>
+<section id="contact"><div class="contact-canvas-wrap"><canvas id="contact-canvas"></canvas></div><div class="s-inner"><div class="s-eye reveal"><span>Get In Touch</span></div><h2 class="s-title reveal">Build With <span class="dim">Confidence</span></h2><div class="contact-grid"><div class="reveal-left"><p style="font-size:15px;color:#555;line-height:1.85;font-weight:300;margin-bottom:32px">Ready to build something exceptional? Our team responds within 24 hours to all enquiries.</p><div class="c-info"><div class="c-item"><div class="c-icon">A</div><div class="c-text"><label>Address</label><p>2554, Gandhi Colony, Ashiyana Nagar<br>Patna - 800025, Bihar, India</p></div></div><div class="c-item"><div class="c-icon">P</div><div class="c-text"><label>Phone</label><p><a href="tel:+917254000010">+91 72540 00010</a><br><a href="tel:+919102434888">+91 91024 34888</a></p></div></div><div class="c-item"><div class="c-icon">E</div><div class="c-text"><label>Email</label><p><a href="mailto:Flowchipinfra13@gmail.com">Flowchipinfra13@gmail.com</a></p></div></div><div class="c-item"><div class="c-icon">S</div><div class="c-text"><label>Area of Work</label><p>Civil, Architecture, Interior</p></div></div></div></div><div class="reveal-right"><form class="c-form" id="contact-form" onsubmit="submitForm(event)" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="hidden_iframe" novalidate data-google-form-action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" data-form-pending-text="Google Form endpoint pending. Replace YOUR_FORM_ID and entry field names with your Google Form IDs to enable submissions."><div class="f-row"><div class="f-grp"><label for="contact-name">Full Name</label><input id="contact-name" name="entry.0000000000" type="text" placeholder="Your full name" required></div><div class="f-grp"><label for="contact-phone">Phone</label><input id="contact-phone" name="entry.0000000001" type="tel" placeholder="+91 XXXXX XXXXX" pattern="[0-9+\-\s]{10,15}" required></div></div><div class="f-grp"><label for="contact-email">Email</label><input id="contact-email" name="entry.0000000002" type="email" placeholder="your@email.com" required></div><div class="f-grp"><label for="contact-service">Service Required</label><select id="contact-service" name="entry.0000000003" required><option value="">Select a service</option><option>Civil Engineering</option><option>Architecture &amp; Design</option><option>Interior Works</option><option>Exterior Design</option><option>Park Construction</option></select></div><div class="f-grp"><label for="contact-details">Project Details</label><textarea id="contact-details" name="entry.0000000004" placeholder="Describe your project, location, timeline..." required></textarea></div><button type="submit" class="btn-p" style="align-self:flex-start">Send Enquiry</button><div class="f-success" id="f-success">Thank you. Your enquiry has been submitted.</div></form><iframe name="hidden_iframe" style="display:none"></iframe></div></div></div></section>
 <div data-shared-footer></div>
-<script>
-  (function(){
-    try{
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET','footer.html',false);
-      xhr.send(null);
-      if(!(xhr.status===200 || xhr.status===0)) throw new Error('HTTP '+xhr.status);
-      var temp=document.createElement('div');
-      temp.innerHTML=xhr.responseText;
-      var footer=temp.firstElementChild;
-      var holder=document.querySelector('[data-shared-footer]');
-      if(holder && footer){ holder.replaceWith(footer); }
-    }catch(e){ console.warn('Shared footer load failed',e); }
-  })();
-</script>
+<script>(function(){try{var xhr=new XMLHttpRequest();xhr.open('GET','footer.html',false);xhr.send(null);if(!(xhr.status===200||xhr.status===0)) throw new Error('HTTP '+xhr.status);var doc=new DOMParser().parseFromString(xhr.responseText,'text/html');doc.querySelectorAll('link[rel="stylesheet"], style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'shared-footer-style-'+idx:'shared-footer-link-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-shared-footer-marker="'+marker+'"]')) return;var clone=node.cloneNode(true);clone.setAttribute('data-shared-footer-marker',marker);document.head.appendChild(clone);});var footer=doc.querySelector('#site-footer');var holder=document.querySelector('[data-shared-footer]');if(holder&&footer){holder.replaceWith(footer);}doc.querySelectorAll('script').forEach(function(node){var script=document.createElement('script');if(node.src){script.src=node.src;}else{script.textContent=node.textContent;}document.body.appendChild(script);});}catch(e){console.warn('Shared footer load failed',e);}})();</script>
 <script src="assets/site.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 

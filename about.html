@@ -1,6 +1,4 @@
-html
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -9,308 +7,52 @@ html
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-/* ---------------------------------------
-   PAGE HERO SLIDER SYSTEM
---------------------------------------- */
-.page-hero {
-  position: relative;
-  min-height: 580px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 0;
-}
-
-/* SLIDE TRACK */
-.phs-track {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.phs-slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transform: scale(1.07);
-  transition: opacity 1.4s cubic-bezier(.4,0,.2,1),
-              transform 9s cubic-bezier(.25,0,.05,1);
-  will-change: opacity, transform;
-}
-.phs-slide.is-active {
-  opacity: 1;
-  transform: scale(1.0);
-}
-.phs-slide.is-out {
-  opacity: 0;
-  transform: scale(1.03);
-  transition: opacity 1.4s cubic-bezier(.4,0,.2,1),
-              transform 1.4s ease;
-}
-
-/* OVERLAYS */
-.phs-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background:
-    linear-gradient(to bottom,
-      rgba(13,27,42,.6) 0%,
-      rgba(13,27,42,.3) 40%,
-      rgba(13,27,42,.92) 100%
-    );
-}
-.phs-overlay-color {
-  position: absolute; inset: 0; z-index: 1;
-  background: radial-gradient(ellipse at 80% 20%, rgba(43,142,199,.12) 0%, transparent 60%);
-  animation: overlay-pulse 8s ease-in-out infinite;
-}
-@keyframes overlay-pulse { 0%,100%{opacity:.6} 50%{opacity:1} }
-
-/* SCANLINES */
-.phs-scanlines {
-  position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px, transparent 3px,
-    rgba(43,142,199,.016) 3px, rgba(43,142,199,.016) 4px
-  );
-}
-
-/* ANIMATED GRID */
-.phs-grid {
-  position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(43,142,199,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(43,142,199,.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: grid-drift 30s linear infinite;
-}
-@keyframes grid-drift { from{background-position:0 0} to{background-position:60px 60px} }
-
-/* FLOATING SHAPES */
-.phs-shapes {
-  position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden;
-}
-.phs-shape {
-  position: absolute;
-  border: 1px solid rgba(245,200,0,.2);
-  animation: shape-float 22s linear infinite;
-}
-.phs-shape:nth-child(1) { width:44px; height:44px; top:18%; right:14%; border-radius:6px; animation-duration:20s; animation-delay:0s; }
-.phs-shape:nth-child(2) { width:26px; height:26px; top:60%; right:24%; border-radius:50%; border-color:rgba(43,142,199,.25); animation-duration:17s; animation-delay:-5s; }
-.phs-shape:nth-child(3) { width:80px; height:2px; top:32%; left:6%; border:none; background:linear-gradient(90deg,transparent,rgba(245,200,0,.35),transparent); animation-duration:26s; animation-delay:-11s; }
-.phs-shape:nth-child(4) { width:18px; height:18px; bottom:32%; left:18%; border-radius:4px; border-color:rgba(245,200,0,.22); animation-duration:15s; animation-delay:-3s; }
-.phs-shape:nth-child(5) { width:60px; height:60px; top:10%; left:40%; border-radius:50%; border-color:rgba(43,142,199,.1); border-width:2px; animation-duration:32s; animation-delay:-8s; }
-@keyframes shape-float {
-  0%,100% { transform:translateY(0) rotate(0deg); opacity:.5; }
-  33%     { transform:translateY(-24px) rotate(120deg); opacity:1; }
-  66%     { transform:translateY(-12px) rotate(240deg); opacity:.7; }
-}
-
-/* LIGHT SWEEP */
-.phs-sweep {
-  position: absolute; inset: 0; z-index: 3; pointer-events: none;
-  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.04) 50%, transparent 70%);
-  background-size: 300% 100%;
-  animation: sweep-move 8s ease-in-out infinite;
-}
-@keyframes sweep-move {
-  0%,100% { background-position: -100% 0; }
-  50%     { background-position: 200% 0; }
-}
-
-/* CORNER BRACKETS */
-.phs-brackets {
-  position: absolute; inset: 24px; z-index: 4; pointer-events: none;
-}
-.phs-bracket {
-  position: absolute; width:28px; height:28px;
-  border-color: rgba(245,200,0,.4); border-style: solid;
-  animation: bracket-pulse 3s ease-in-out infinite;
-}
-.phs-bracket.tl { top:0; left:0; border-width:2px 0 0 2px; border-radius:4px 0 0 0; }
-.phs-bracket.tr { top:0; right:0; border-width:2px 2px 0 0; border-radius:0 4px 0 0; animation-delay:.5s; }
-.phs-bracket.bl { bottom:0; left:0; border-width:0 0 2px 2px; border-radius:0 0 0 4px; animation-delay:1s; }
-.phs-bracket.br { bottom:0; right:0; border-width:0 2px 2px 0; border-radius:0 0 4px 0; animation-delay:1.5s; }
-@keyframes bracket-pulse { 0%,100%{opacity:.25} 50%{opacity:.8} }
-
-/* SLIDE COUNTER */
-.phs-counter {
-  position: absolute; top: 32px; right: 32px; z-index: 8;
-  display: flex; align-items: center; gap: 10px;
-}
-.phs-counter-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px; letter-spacing: .12em;
-  color: rgba(255,255,255,.5);
-}
-.phs-counter-num.active { color: var(--gold); font-size: 15px; }
-.phs-counter-sep { width: 30px; height: 1px; background: rgba(255,255,255,.2); }
-
-/* PROGRESS BAR */
-.phs-progress {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 8;
-  height: 3px; background: rgba(255,255,255,.08);
-}
-.phs-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--sky));
-  width: 0%;
-  transition: width linear;
-  border-radius: 0 2px 2px 0;
-}
-
-/* NAV DOTS */
-.phs-dots {
-  position: absolute; bottom: 24px; right: 32px; z-index: 8;
-  display: flex; gap: 8px; align-items: center;
-}
-.phs-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,.3); cursor: pointer;
-  transition: all .4s ease; border: 1px solid transparent;
-}
-.phs-dot.active {
-  background: var(--gold); width: 22px; border-radius: 3px;
-  box-shadow: 0 0 8px rgba(245,200,0,.5);
-}
-
-/* NAV ARROWS */
-.phs-arrows {
-  position: absolute; bottom: 18px; left: 32px; z-index: 8;
-  display: flex; gap: 10px;
-}
-.phs-arrow {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(13,27,42,.6); backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,.15);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all .3s ease; color: rgba(255,255,255,.7);
-}
-.phs-arrow:hover {
-  background: var(--gold); border-color: var(--gold); color: var(--navy);
-  transform: scale(1.1);
-}
-.phs-arrow svg { width: 14px; height: 14px; }
-
-/* PAGE HERO INNER */
-.page-hero-inner {
-  position: relative; z-index: 6;
-  padding: 60px 0 48px;
-  width: 100%;
-}
-.page-hero-inner .s-inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 40px;
-}
-
-/* SLIDE CAPTION */
-.phs-caption {
-  position: absolute; top: 50%; right: 40px; transform: translateY(-50%);
-  z-index: 6; text-align: right;
-  opacity: 0; transition: opacity .8s ease .4s, transform .8s ease .4s;
-  transform: translateY(-50%) translateX(20px);
-}
-.phs-caption.visible {
-  opacity: 1; transform: translateY(-50%) translateX(0);
-}
-.phs-caption-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 6px;
-  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
-}
-.phs-caption-label::after {
-  content: ''; width: 20px; height: 1px; background: var(--gold);
-}
-.phs-caption-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px; font-weight: 600; color: rgba(255,255,255,.7);
-  max-width: 200px; text-align: right; line-height: 1.4;
-}
-
-/* -- ABOUT PAGE SPECIFIC -- */
-.team-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:16px;
-}
-.team-card {
-  background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg);
-  overflow:hidden; transition:all var(--trans);
-}
-.team-card:hover { transform:translateY(-6px); box-shadow:var(--shadow) }
-.team-img {
-  height:220px; background-size:cover; background-position:top center; position:relative;
-}
-.team-img::after {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(to bottom,transparent 60%,rgba(13,27,42,.7));
-}
-.team-info { padding:20px 22px }
-.team-info h4 { font-family:var(--font-cond); font-size:18px; font-weight:700; color:var(--fg); margin-bottom:4px }
-.team-info .role { font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--sky); margin-bottom:8px }
-.team-info p { font-size:13px; font-weight:300; color:var(--gray); line-height:1.7 }
-
-.values-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:16px;
-}
-.value-card {
-  padding:32px 28px;
-  background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg);
-  transition:all var(--trans); position:relative; overflow:hidden;
-}
-.value-card::before {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,var(--gold),var(--sky));
-  transform:scaleX(0); transform-origin:left; transition:transform var(--trans);
-}
-.value-card:hover::before { transform:scaleX(1) }
-.value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow) }
-.value-icon { font-size:32px; margin-bottom:16px }
-.value-card h4 { font-family:var(--font-cond); font-size:19px; font-weight:700; color:var(--fg); margin-bottom:10px }
-.value-card p { font-size:13.5px; font-weight:300; color:var(--gray); line-height:1.75 }
-
-/* ABOUT HERO TAGLINE */
-.about-hero-tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(245,200,0,.1); border: 1px solid rgba(245,200,0,.3);
-  border-radius: 99px; padding: 6px 16px; margin-bottom: 16px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold); animation: fade-up .8s .2s both;
-}
-.aht-dot {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
-  animation: dot-ping 1.5s ease-in-out infinite;
-}
-@keyframes dot-ping { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.6);opacity:.4} }
-@keyframes fade-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-@media(max-width:900px){
-  .team-grid { grid-template-columns:1fr 1fr }
-  .values-grid { grid-template-columns:1fr 1fr }
-  .phs-caption { display:none }
-}
-@media(max-width:600px){
-  .team-grid { grid-template-columns:1fr }
-  .values-grid { grid-template-columns:1fr }
-  .page-hero { min-height:460px }
-}
+.page-hero { position: relative; min-height: 580px; overflow: hidden; }
+.phs-scanlines { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(43,142,199,.016) 3px, rgba(43,142,199,.016) 4px); }
+.phs-shapes { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+.phs-shape { position: absolute; border: 1px solid rgba(245,200,0,.2); animation: shape-float 22s linear infinite; }
+.phs-shape:nth-child(1) { width: 44px; height: 44px; top: 18%; right: 14%; border-radius: 6px; animation-duration: 20s; }
+.phs-shape:nth-child(2) { width: 26px; height: 26px; top: 60%; right: 24%; border-radius: 50%; border-color: rgba(43,142,199,.25); animation-duration: 17s; animation-delay: -5s; }
+.phs-shape:nth-child(3) { width: 80px; height: 2px; top: 32%; left: 6%; border: none; background: linear-gradient(90deg, transparent, rgba(245,200,0,.35), transparent); animation-duration: 26s; animation-delay: -11s; }
+.phs-shape:nth-child(4) { width: 18px; height: 18px; bottom: 32%; left: 18%; border-radius: 4px; border-color: rgba(245,200,0,.22); animation-duration: 15s; animation-delay: -3s; }
+.phs-shape:nth-child(5) { width: 60px; height: 60px; top: 10%; left: 40%; border-radius: 50%; border-color: rgba(43,142,199,.1); border-width: 2px; animation-duration: 32s; animation-delay: -8s; }
+@keyframes shape-float { 0%,100% { transform: translateY(0) rotate(0deg); opacity: .5; } 33% { transform: translateY(-24px) rotate(120deg); opacity: 1; } 66% { transform: translateY(-12px) rotate(240deg); opacity: .7; } }
+.phs-sweep { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.04) 50%, transparent 70%); background-size: 300% 100%; animation: sweep-move 8s ease-in-out infinite; }
+@keyframes sweep-move { 0%,100% { background-position: -100% 0; } 50% { background-position: 200% 0; } }
+.phs-brackets { position: absolute; inset: 24px; z-index: 4; pointer-events: none; }
+.phs-bracket { position: absolute; width: 28px; height: 28px; border-color: rgba(245,200,0,.4); border-style: solid; animation: bracket-pulse 3s ease-in-out infinite; }
+.phs-bracket.tl { top: 0; left: 0; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.phs-bracket.tr { top: 0; right: 0; border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; animation-delay: .5s; }
+.phs-bracket.bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; animation-delay: 1s; }
+.phs-bracket.br { bottom: 0; right: 0; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; animation-delay: 1.5s; }
+@keyframes bracket-pulse { 0%,100% { opacity: .25; } 50% { opacity: .8; } }
+.about-hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,200,0,.1); border: 1px solid rgba(245,200,0,.25); border-radius: 99px; padding: 6px 16px; margin-bottom: 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.aht-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: dot-ping 1.5s ease-in-out infinite; }
+@keyframes dot-ping { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.6); opacity: .4; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.value-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans); }
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: rgba(245,200,0,.28); }
+.value-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 14px; margin-bottom: 18px; background: rgba(245,200,0,.12); color: var(--gold); font-size: 22px; }
+.value-card h4 { font-family: var(--font-cond); font-size: 22px; font-weight: 700; margin-bottom: 10px; color: var(--fg); }
+.value-card p { font-size: 14px; line-height: 1.8; color: var(--gray); }
+@media(max-width: 900px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 600px) { .page-hero { min-height: 460px; } .values-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body data-page="about" data-theme="light">
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="cur-ring"></div>
 
-<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-stripe"></div>
   <div class="nav-shell">
-    <div class="nav-orb nav-orb-1"></div><div class="nav-orb nav-orb-2"></div><div class="nav-orb nav-orb-3"></div>
+    <div class="nav-orb nav-orb-1"></div>
+    <div class="nav-orb nav-orb-2"></div>
+    <div class="nav-orb nav-orb-3"></div>
     <div class="nav-inner">
       <a class="nav-logo" href="home.html">
-        <div class="nav-logo-mark">
-          <div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div>
-          <img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra">
-        </div>
+<div class="nav-logo-mark"><div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div><img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra full logo"></div>
         <div class="nav-brand-text"><strong>Flowchip Infra Pvt Ltd</strong><em></em></div>
       </a>
       <div class="nav-center">
@@ -321,23 +63,13 @@ html
         <a class="nav-link" href="process.html">Process</a>
       </div>
       <div class="nav-right">
-        <button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme">
-          <span class="ntb-icon" data-theme-icon>?</span>
-          <span data-theme-label>Dark Mode</span>
-        </button>
-        <a class="nav-cta-btn" href="contact.html">
-          <span>Contact Us</span>
-          <svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()">
-          <span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span>
-        </button>
+        <button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme"><span class="ntb-icon" data-theme-icon>&#9728;</span><span data-theme-label>Dark Mode</span></button>
+        <a class="nav-cta-btn" href="contact.html"><span>Contact Us</span><svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()"><span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span></button>
       </div>
     </div>
   </div>
 </nav>
-
-<!-- MOBILE MENU -->
 <div class="mob-nav" id="mob-menu">
   <a href="home.html" onclick="closeMob()">Home</a>
   <a href="services.html" onclick="closeMob()">Services</a>
@@ -345,79 +77,40 @@ html
   <a href="projects.html" onclick="closeMob()">Projects</a>
   <a href="process.html" onclick="closeMob()">Process</a>
   <a href="contact.html" onclick="closeMob()">Contact</a>
-  <div class="mob-contact-row">
-    <a href="tel:+917254000010" onclick="closeMob()">72540 00010</a>
-    <a href="contact.html" onclick="closeMob()">Get a Quote ?</a>
-  </div>
+  <div class="mob-contact-row"><a href="tel:+917254000010" onclick="closeMob()">72540 00010</a><a href="contact.html" onclick="closeMob()">Get a Quote</a></div>
   <span class="mob-close-hint">Press Esc or tap link to close</span>
 </div>
 
-<!-- --------------- PAGE HERO WITH SLIDER --------------- -->
-<div class="page-hero" id="about-hero">
-  <!-- SLIDE TRACK -->
-  <div class="phs-track" id="about-phs-track"></div>
-
-  <!-- OVERLAYS -->
-  <div class="phs-overlay"></div>
-  <div class="phs-overlay-color"></div>
+<div class="page-hero page-hero-single" id="about-hero">
+  <div class="page-hero-grid"></div>
   <div class="phs-scanlines"></div>
-  <div class="phs-grid"></div>
-
-  <!-- FLOATING SHAPES -->
-  <div class="phs-shapes">
-    <div class="phs-shape"></div>
-    <div class="phs-shape"></div>
-    <div class="phs-shape"></div>
-    <div class="phs-shape"></div>
-    <div class="phs-shape"></div>
-  </div>
-
-  <!-- LIGHT SWEEP -->
+  <div class="phs-shapes"><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div><div class="phs-shape"></div></div>
   <div class="phs-sweep"></div>
-
-  <!-- CORNER BRACKETS -->
-  <div class="phs-brackets">
-    <div class="phs-bracket tl"></div>
-    <div class="phs-bracket tr"></div>
-    <div class="phs-bracket bl"></div>
-    <div class="phs-bracket br"></div>
-  </div>
-
-  <!-- SLIDE COUNTER -->
-  <div class="phs-counter" id="about-counter"></div>
-
-  <!-- SLIDE CAPTION -->
-  <div class="phs-caption" id="about-caption">
-    <div class="phs-caption-label">Our Projects</div>
-    <div class="phs-caption-title" id="about-caption-title">Engineering Excellence</div>
-  </div>
-
-  <!-- PROGRESS BAR -->
-  <div class="phs-progress"><div class="phs-progress-fill" id="about-progress"></div></div>
-
-  <!-- DOTS & ARROWS -->
-  <div class="phs-dots" id="about-dots"></div>
-  <div class="phs-arrows">
-    <div class="phs-arrow" id="about-prev" aria-label="Previous">
-      <svg viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="phs-arrow" id="about-next" aria-label="Next">
-      <svg viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-  </div>
-
-  <!-- HERO CONTENT -->
-  <div class="page-hero-inner">
-    <div class="s-inner">
+  <div class="phs-brackets"><div class="phs-bracket tl"></div><div class="phs-bracket tr"></div><div class="phs-bracket bl"></div><div class="phs-bracket br"></div></div>
+  <div class="page-hero-shell">
+    <div class="page-hero-copy">
       <div class="about-hero-tag"><div class="aht-dot"></div>About Us</div>
-      <div class="breadcrumb" style="margin-bottom:10px"><a href="home.html">Home</a> <span>/</span> <span>About</span></div>
+      <div class="breadcrumb" style="margin-bottom:10px"><a href="home.html">Home</a><span>/</span><span>About</span></div>
       <h2 class="s-title" style="animation:fade-up .9s .3s both">Who We <span class="dim">Are</span></h2>
-      <p class="s-sub" style="animation:fade-up .9s .5s both;max-width:600px">Engineering excellence, integrity, and lasting partnerships � built from the ground up.</p>
+      <p class="s-sub" style="animation:fade-up .9s .5s both;max-width:600px">Engineering excellence, integrity, and lasting partnerships built from the ground up.</p>
+      <div class="page-hero-meta" style="animation:fade-up .9s .6s both">
+        <span class="page-hero-pill">7+ Years Experience</span>
+        <span class="page-hero-pill">Integrated Delivery Team</span>
+        <span class="page-hero-pill">Patna, Bihar</span>
+      </div>
+      <div class="page-hero-actions" style="animation:fade-up .9s .75s both">
+        <a href="projects.html" class="btn-primary"><span>See Projects</span></a>
+        <a href="contact.html" class="btn-secondary">Talk to Us</a>
+      </div>
+    </div>
+    <div class="page-hero-visual" style="animation:fade-up .95s .35s both">
+      <div class="page-hero-frame"><img src="images/buildings.jpg" alt="Flowchip Infra project view"></div>
+      <div class="page-hero-accent">Built on trust</div>
+      <div class="page-hero-note"><span class="page-hero-note-label">Delivery mindset</span><strong>Long-term partnerships</strong><p>Transparent coordination, practical engineering, and quality that holds up after handover.</p></div>
     </div>
   </div>
 </div>
 
-<!-- ABOUT SECTION -->
 <section id="about" style="padding:100px 0">
   <div class="about-canvas-wrap"><canvas id="about-canvas"></canvas></div>
   <div class="s-inner">
@@ -425,50 +118,46 @@ html
       <div class="reveal-left">
         <div class="s-eye"><span>Our Story</span></div>
         <h2 class="s-title">Built on <span class="dim">Trust</span></h2>
-        <p style="font-size:15px;font-weight:300;color:var(--gray);line-height:1.85;margin-bottom:20px">
-          Flowchip Infra Pvt Ltd was founded with a singular mission: to deliver infrastructure projects that combine engineering rigour with design intelligence. Operating from Patna, Bihar, we serve clients across India with disciplined execution, practical design thinking, and dependable project delivery.
-        </p>
-        <p style="font-size:15px;font-weight:300;color:var(--gray);line-height:1.85;margin-bottom:20px">
-          Over 7+ years, we've built our reputation project by project, never compromising on quality and always delivering on our word. Our team of civil engineers, architects, and interior specialists work as one cohesive unit, ensuring every project from concept to handover reflects the same standard of excellence.
-        </p>
+        <p style="font-size:15px;font-weight:300;color:var(--gray);line-height:1.85;margin-bottom:20px">Flowchip Infra Pvt Ltd was founded with a singular mission: to deliver infrastructure projects that combine engineering rigour with design intelligence. Operating from Patna, Bihar, we serve clients across India with disciplined execution, practical design thinking, and dependable project delivery.</p>
+        <p style="font-size:15px;font-weight:300;color:var(--gray);line-height:1.85;margin-bottom:20px">Over 7+ years, we've built our reputation project by project, never compromising on quality and always delivering on our word. Our team of civil engineers, architects, and interior specialists work as one cohesive unit, ensuring every project from concept to handover reflects the same standard of excellence.</p>
         <div class="vision-box">
           <p>"To become a respected infrastructure company known for integrity, engineering excellence, and consistent delivery of high-quality projects. We aim to build infrastructure that stands the test of time, supports national growth, and reflects our commitment to professionalism, safety, and customer satisfaction."</p>
-        </div></div>
+        </div>
       </div>
       <div class="ab-items reveal-right">
-        <div class="ab-item"><div class="ab-icon">??</div><div><h4>Domain Expertise</h4><p>Civil, Architecture, and Interior � complete project lifecycle covered by dedicated specialists across all disciplines. No hand-offs, no gaps.</p></div></div>
-        <div class="ab-item"><div class="ab-icon">??</div><div><h4>Safety First</h4><p>Stringent safety protocols on every site. Zero compromise on material quality, compliance, and worker protection at all times.</p></div></div>
-        <div class="ab-item"><div class="ab-icon">??</div><div><h4>Engineering Precision</h4><p>Modern engineering practices with rigorous quality checks at every project milestone � no shortcuts, no exceptions, ever.</p></div></div>
-        <div class="ab-item"><div class="ab-icon">??</div><div><h4>Long-term Partnership</h4><p>Repeat work and long-term client relationships reflect our consistent delivery and genuine commitment to client success beyond handover.</p></div></div>
-        <div class="ab-item"><div class="ab-icon">??</div><div><h4>Bihar-Based, India-Ready</h4><p>Headquartered in Patna, our local insight and national capabilities make us the ideal delivery partner for projects across India.</p></div></div>
+        <div class="ab-item"><div class="ab-icon">01</div><div><h4>Domain Expertise</h4><p>Civil, architecture, and interior capabilities under one roof for a tighter and more accountable project lifecycle.</p></div></div>
+        <div class="ab-item"><div class="ab-icon">02</div><div><h4>Safety First</h4><p>Stringent safety protocols on every site with zero compromise on materials, compliance, or worker protection.</p></div></div>
+        <div class="ab-item"><div class="ab-icon">03</div><div><h4>Engineering Precision</h4><p>Modern engineering practices and rigorous quality checks at every milestone with no shortcuts.</p></div></div>
+        <div class="ab-item"><div class="ab-icon">04</div><div><h4>Long-term Partnership</h4><p>Repeat work and long-term client relationships reflect dependable delivery and strong coordination.</p></div></div>
+        <div class="ab-item"><div class="ab-icon">05</div><div><h4>Bihar-Based, India-Ready</h4><p>Headquartered in Patna with local insight and delivery discipline suited to larger project demands.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES -->
 <section style="padding:80px 0;background:var(--off)">
   <div class="s-inner">
     <div class="s-eye reveal"><span>Core Values</span></div>
     <h2 class="s-title reveal">What We <span class="dim">Stand For</span></h2>
-    <p class="s-sub reveal">Our values aren't posters on a wall � they're written into every site visit, every blueprint, every handover.</p>
+    <p class="s-sub reveal">Our values are visible in planning discipline, site execution, and the standards we hold from first meeting to handover.</p>
     <div class="values-grid">
-      <div class="value-card reveal"><div class="value-icon">??</div><h4>Engineering Excellence</h4><p>We apply rigorous technical standards to every project, ensuring structural integrity and performance that outlasts expectations.</p></div>
-      <div class="value-card reveal rd1"><div class="value-icon">??</div><h4>Integrity &amp; Transparency</h4><p>Honest timelines, honest budgets, honest updates. Our clients always know exactly where their project stands.</p></div>
-      <div class="value-card reveal rd2"><div class="value-icon">??</div><h4>Sustainable Practices</h4><p>We integrate environmentally responsible materials and methods wherever possible, building for the long-term benefit of communities.</p></div>
-      <div class="value-card reveal"><div class="value-icon">??</div><h4>On-Time Delivery</h4><p>Project delays cost money and trust. Our structured process is designed around meeting � and often beating � committed deadlines.</p></div>
-      <div class="value-card reveal rd1"><div class="value-icon">??</div><h4>Safety Culture</h4><p>Every worker, every day, every site. Zero accidents is not an aspiration � it's a discipline we practice rigorously.</p></div>
-      <div class="value-card reveal rd2"><div class="value-icon">??</div><h4>Quality Assurance</h4><p>Systematic quality checks at every phase means no surprises at handover and no defects to chase down post-delivery.</p></div>
+      <div class="value-card reveal"><div class="value-icon">EX</div><h4>Engineering Excellence</h4><p>Rigorous technical standards ensure structural integrity, performance, and durability that outlast expectations.</p></div>
+      <div class="value-card reveal rd1"><div class="value-icon">IT</div><h4>Integrity</h4><p>Honest budgets, realistic timelines, and direct updates keep clients informed at every stage.</p></div>
+      <div class="value-card reveal rd2"><div class="value-icon">SD</div><h4>Sustainable Thinking</h4><p>Materials and methods are selected with practical long-term value and responsible delivery in mind.</p></div>
+      <div class="value-card reveal"><div class="value-icon">OT</div><h4>On-Time Delivery</h4><p>Structured planning and milestone controls reduce delays and protect project momentum.</p></div>
+      <div class="value-card reveal rd1"><div class="value-icon">SF</div><h4>Safety Culture</h4><p>Worker safety, site discipline, and compliance are treated as non-negotiable operating standards.</p></div>
+      <div class="value-card reveal rd2"><div class="value-icon">QA</div><h4>Quality Assurance</h4><p>Systematic checks throughout execution reduce defects, rework, and handover risk.</p></div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
 <section id="stats-band">
   <canvas class="stats-canvas" id="stats-canvas"></canvas>
   <div class="stats-grid">
     <div class="stat-box reveal"><div class="stat-big"><span class="cnt2" data-target="7" data-suffix="+">0+</span></div><div class="stat-lbl">Years of Experience</div></div>
     <div class="stat-box reveal rd1"><div class="stat-big"><span class="cnt2" data-target="50" data-suffix="+">0+</span></div><div class="stat-lbl">Projects Delivered</div></div>
+    <div class="stat-box reveal rd2"><div class="stat-big"><span class="cnt2" data-target="3" data-suffix="+">0+</span></div><div class="stat-lbl">Core Disciplines</div></div>
+    <div class="stat-box reveal rd3"><div class="stat-big"><span class="cnt2" data-target="100" data-suffix="%">0%</span></div><div class="stat-lbl">Commitment to Quality</div></div>
   </div>
 </section>
 
@@ -476,7 +165,7 @@ html
   <div class="cta-panel reveal">
     <div>
       <h3>Looking for a delivery partner you can rely on long term?</h3>
-      <p>The company is built for repeatability: disciplined planning, transparent execution, and high-quality outputs that hold up over time.</p>
+      <p>The company is built for repeatability: disciplined planning, transparent execution, and quality outputs that hold up over time.</p>
     </div>
     <div class="cta-panel-actions">
       <a href="contact.html" class="btn-p">Start an Enquiry</a>
@@ -485,7 +174,6 @@ html
   </div>
 </section>
 
-<!-- FOOTER (shared) -->
 <div data-shared-footer></div>
 <script>
   (function(){
@@ -494,56 +182,30 @@ html
       xhr.open('GET','footer.html',false);
       xhr.send(null);
       if(!(xhr.status===200 || xhr.status===0)) throw new Error('HTTP '+xhr.status);
-      var temp=document.createElement('div');
-      temp.innerHTML=xhr.responseText;
-      var footer=temp.firstElementChild;
+      var doc=new DOMParser().parseFromString(xhr.responseText,'text/html');
+      doc.querySelectorAll('link[rel="stylesheet"], style').forEach(function(node, idx){
+        var marker=node.tagName==='STYLE'
+          ? 'shared-footer-style-'+idx
+          : 'shared-footer-link-'+(node.getAttribute('href') || idx);
+        if(document.head.querySelector('[data-shared-footer-marker="'+marker+'"]')) return;
+        var clone=node.cloneNode(true);
+        clone.setAttribute('data-shared-footer-marker', marker);
+        document.head.appendChild(clone);
+      });
+      var footer=doc.querySelector('#site-footer');
       var holder=document.querySelector('[data-shared-footer]');
       if(holder && footer){ holder.replaceWith(footer); }
+      doc.querySelectorAll('script').forEach(function(node){
+        var script=document.createElement('script');
+        if(node.src){ script.src=node.src; }
+        else { script.textContent=node.textContent; }
+        document.body.appendChild(script);
+      });
     }catch(e){ console.warn('Shared footer load failed',e); }
   })();
 </script>
-
-<script>
-/* -- HERO SLIDES (uses same images as home page) -- */
-window.heroSlides = [
-  { src:"images/architechture.jpg", alt:"Architecture", caption:"Architecture & Design" },
-  { src:"images/building.jpg", alt:"Building", caption:"Premium Construction" },
-  { src:"images/buildings.jpg", alt:"Buildings", caption:"Structural Excellence" },
-
-  { src:"images/civil.jpg", alt:"Civil Engineering", caption:"Civil Engineering" },
-  { src:"images/interior (2).jpeg", alt:"Interior Design", caption:"Interior Design" },
-  { src:"images/interior.jpeg", alt:"Interior Works", caption:"Interior Works" },
-  { src:"images/park 2.jpg", alt:"Park Construction", caption:"Park Construction" },
-  { src:"images/Park.jpg", alt:"Landscape Works", caption:"Landscape Works" },
-  { src:"images/WhatsApp Image 2026-04-28 at 3.12.41 PM.jpeg", alt:"Institutional Works", caption:"Institutional Works" }
-];
-window.projectSlides = [
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.11.07 PM.jpeg", alt:"Project 1", caption:"Infrastructure Excellence" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.32 PM.jpeg", alt:"Project 2", caption:"Campus Construction" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.34 PM.jpeg", alt:"Project 3", caption:"Structural Works" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.39 PM.jpeg", alt:"Project 4", caption:"Urban Development" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.12.41 PM.jpeg", alt:"Project 5", caption:"Institutional Works" },
-  { src:"original images/WhatsApp Image 2026-04-28 at 3.13.04 PM.jpeg", alt:"Project 6", caption:"Civil Infrastructure" }
-];
-</script>
 <script src="assets/site.js"></script>
-<script src="assets/hero-slider.js"></script>
 <script>
-/* Init hero slider for about page � use heroSlides */
-initPageHeroSlider({
-  trackId:    'about-phs-track',
-  dotsId:     'about-dots',
-  counterId:  'about-counter',
-  progressId: 'about-progress',
-  prevId:     'about-prev',
-  nextId:     'about-next',
-  captionTitleId: 'about-caption-title',
-  captionId:  'about-caption',
-  slides:     window.heroSlides,
-  interval:   5000
-});
-
-/* About section canvas */
 (function(){
   const c = document.getElementById('about-canvas');
   if(!c) return;
@@ -559,15 +221,10 @@ initPageHeroSlider({
     for(let i=0;i<5;i++){
       const x=W*(0.2+i*0.18)+Math.sin(t+i)*60, y=H*.5+Math.cos(t*0.7+i)*80, r=80+i*30;
       const g=ctx.createRadialGradient(x,y,0,x,y,r);
-      g.addColorStop(0,'rgba(43,142,199,0.06)'); g.addColorStop(1,'transparent');
+      g.addColorStop(0,i%2===0?'rgba(43,142,199,.08)':'rgba(245,200,0,.05)');
+      g.addColorStop(1,'rgba(0,0,0,0)');
       ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
     }
-    ctx.save(); ctx.strokeStyle='rgba(245,200,0,0.04)'; ctx.lineWidth=1;
-    for(let i=-H;i<W+H;i+=60){
-      ctx.beginPath(); ctx.moveTo(i+Math.sin(t*0.5)*10,0);
-      ctx.lineTo(i+H+Math.sin(t*0.5)*10,H); ctx.stroke();
-    }
-    ctx.restore();
     requestAnimationFrame(draw);
   }
   draw();
@@ -575,7 +232,4 @@ initPageHeroSlider({
 </script>
 </body>
 </html>
-
-
-
 
