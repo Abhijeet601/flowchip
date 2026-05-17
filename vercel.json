@@ -8,12 +8,32 @@
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "/home.html"
+      "src": "^/home\\.html$",
+      "status": 301,
+      "dest": "/"
     },
     {
-      "src": "/(.*)",
+      "src": "^/index\\.html$",
+      "status": 301,
+      "dest": "/"
+    },
+    {
+      "src": "^/(.+)\\.html$",
+      "status": 301,
       "dest": "/$1"
+    },
+    {
+      "src": "^/home/?$",
+      "status": 301,
+      "dest": "/"
+    },
+    {
+      "src": "^/([^/.]+)/?$",
+      "dest": "/$1.html"
+    },
+    {
+      "src": "/",
+      "dest": "/home.html"
     }
   ]
 }

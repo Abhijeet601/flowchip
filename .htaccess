@@ -1,0 +1,17 @@
+DirectoryIndex home.html
+
+RewriteEngine On
+RewriteBase /
+
+# Redirect old .html URLs to clean URLs
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(home|about|services|projects|process|contact)\.html[?\s] [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Redirect /home to homepage canonical URL
+RewriteRule ^home/?$ / [R=301,L]
+
+# Serve clean URLs by rewriting to .html files internally
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([A-Za-z0-9_-]+)/?$ $1.html [L]

@@ -60,9 +60,13 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMob(); }
 
 /* ── ACTIVE NAV LINK ── */
 (function(){
-  const page = window.location.pathname.split('/').pop() || 'home.html';
+  const route = window.location.pathname.replace(/\/+$/, '');
+  const page = route === '' ? 'home' : route.replace(/^\//, '');
   document.querySelectorAll('.nav-link').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === page);
+    let href = (a.getAttribute('href') || '').replace(/\/+$/, '');
+    if (href === '') href = 'home';
+    if (href.startsWith('/')) href = href.slice(1);
+    a.classList.toggle('active', href === page);
   });
 })();
 
