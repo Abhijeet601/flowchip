@@ -5,7 +5,7 @@ RewriteBase /
 
 # Redirect old .html URLs to clean URLs
 RewriteRule ^index\.html$ / [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+(home|about|services|projects|process|contact)\.html[?\s] [NC]
+RewriteCond %{THE_REQUEST} \s/+(home|about|services|projects|gallery|process|contact)\.html[?\s] [NC]
 RewriteRule ^ %1 [R=301,L]
 
 # Redirect /home to homepage canonical URL
