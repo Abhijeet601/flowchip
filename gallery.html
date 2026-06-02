@@ -4,108 +4,795 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flowchip Infra | Gallery</title>
-<meta name="description" content="Project photo gallery from Flowchip Infra Pvt Ltd site work, interiors, civil infrastructure, and construction delivery.">
+<meta name="description" content="Project photo gallery from Flowchip Infra Pvt Ltd — site work, interiors, civil infrastructure, and construction delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-.gallery-hero{position:relative;min-height:520px;padding:150px 0 86px;overflow:hidden;background:linear-gradient(135deg,#08121d 0%,#10253a 52%,#173550 100%);color:#fff}
-.gallery-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:68px 68px;opacity:.28}
-.gallery-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 28%,rgba(43,142,199,.26),transparent 32%),radial-gradient(circle at 84% 18%,rgba(245,200,0,.18),transparent 24%)}
-.gallery-hero-shell{position:relative;z-index:1;max-width:1340px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,460px);gap:48px;align-items:end}
-.gallery-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.gallery-eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(245,200,0,.14)}
-.gallery-hero h1{font-family:var(--font-display);font-size:clamp(64px,9vw,124px);line-height:.88;letter-spacing:.02em;text-transform:uppercase}
-.gallery-hero h1 span{display:block;color:var(--gold)}
-.gallery-hero p{max-width:660px;margin-top:22px;color:rgba(255,255,255,.76);font-size:17px;line-height:1.8}
-.gallery-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.gallery-summary-item{padding:18px;border:1px solid rgba(255,255,255,.13);border-radius:14px;background:rgba(255,255,255,.08);backdrop-filter:blur(12px)}
-.gallery-summary-item strong{display:block;font-family:var(--font-display);font-size:42px;line-height:.9;color:var(--gold)}
-.gallery-summary-item span{display:block;margin-top:8px;font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62)}
-.gallery-section{padding:80px 0 100px;background:var(--bg)}
-.gallery-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}
-.gallery-toolbar h2{font-family:var(--font-cond);font-size:34px;line-height:1;color:var(--fg)}
-.gallery-toolbar p{max-width:560px;margin-top:8px;color:var(--gray)}
-.gallery-count{flex-shrink:0;padding:9px 16px;border:1px solid var(--border);border-radius:99px;font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);background:var(--card)}
-.gallery-grid-full{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.gallery-card{position:relative;aspect-ratio:4/3;overflow:hidden;border:0;background:#0d1b2a;cursor:pointer}
-.gallery-card:nth-child(7n+1){grid-row:span 2;aspect-ratio:auto}
-.gallery-card:nth-child(11n+3){grid-column:span 2}
-.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease,filter .55s ease}
-.gallery-card:hover img,.gallery-card:focus-visible img{transform:scale(1.07);filter:saturate(1.08)}
-.gallery-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,18,29,.72),rgba(8,18,29,.04) 58%);opacity:.62;transition:opacity .3s ease}
-.gallery-card:hover::after,.gallery-card:focus-visible::after{opacity:.9}
-.gallery-card-label{position:absolute;left:14px;right:14px;bottom:13px;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
-.gallery-card-label span{font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gallery-card-label svg{width:20px;height:20px;flex-shrink:0;color:var(--gold)}
-.gallery-lightbox{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;background:rgba(3,8,14,.94);backdrop-filter:blur(18px);padding:78px 72px 64px}
-.gallery-lightbox.open{display:flex}
-.gallery-lightbox img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 30px 90px rgba(0,0,0,.45)}
-.glb-btn{position:absolute;display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(255,255,255,.1);color:#fff;transition:background .25s,color .25s,border-color .25s}
-.glb-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
-.glb-close{top:24px;right:24px;font-size:26px;line-height:1}
-.glb-prev{left:24px;top:50%;transform:translateY(-50%)}
-.glb-next{right:24px;top:50%;transform:translateY(-50%)}
-.glb-caption{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);max-width:calc(100vw - 40px);padding:9px 18px;border:1px solid rgba(255,255,255,.12);border-radius:99px;background:rgba(13,27,42,.72);font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.76);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:1000px){.gallery-hero-shell{grid-template-columns:1fr}.gallery-summary{max-width:460px}.gallery-grid-full{grid-template-columns:repeat(3,minmax(0,1fr))}.gallery-card:nth-child(11n+3){grid-column:span 1}}
-@media(max-width:720px){.gallery-hero{padding-top:128px}.gallery-hero-shell,.s-inner{padding-left:22px;padding-right:22px}.gallery-toolbar{display:block}.gallery-count{display:inline-flex;margin-top:16px}.gallery-grid-full{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.gallery-card:nth-child(7n+1){grid-row:span 1;aspect-ratio:4/3}.gallery-card-label span{font-size:10px}.gallery-lightbox{padding:72px 14px 62px}.glb-prev{left:10px}.glb-next{right:10px}.glb-btn{width:40px;height:40px}}
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --navy:   #06111c;
+  --navy2:  #0d1f2f;
+  --navy3:  #142d42;
+  --gold:   #f5c800;
+  --gold2:  #ffdc5c;
+  --ice:    #d4eaf7;
+  --fg:     #e8f2fb;
+  --gray:   #7a9ab5;
+  --border: rgba(255,255,255,.1);
+  --card:   rgba(255,255,255,.04);
+  --r:      16px;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy);
+  color:var(--fg);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ─── CURSOR ─────────────────────────────────────────────── */
+#fc-cursor{
+  position:fixed;z-index:99999;
+  width:12px;height:12px;
+  background:var(--gold);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;
+  mix-blend-mode:difference;
+}
+#fc-cursor-ring{
+  position:fixed;z-index:99998;
+  width:40px;height:40px;
+  border:1.5px solid rgba(245,200,0,.5);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:transform .12s var(--ease-out-expo),width .35s,height .35s,opacity .3s,border-color .3s;
+}
+body:has(.gallery-card:hover) #fc-cursor{width:48px;height:48px;background:rgba(245,200,0,.15);}
+body:has(.gallery-card:hover) #fc-cursor-ring{width:0;height:0;opacity:0;}
+
+/* ─── HERO ───────────────────────────────────────────────── */
+.gh{
+  position:relative;
+  min-height:620px;
+  display:flex;
+  align-items:center;
+  padding:132px 0 64px;
+  overflow:hidden;
+  background: var(--navy);
+}
+
+/* animated grid bg */
+.gh-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* floating orbs */
+.gh-orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.gh-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  animation:gh-float 12s ease-in-out infinite alternate;
+}
+.gh-orb-1{width:560px;height:560px;background:rgba(43,142,199,.22);top:-10%;left:-8%;animation-delay:0s}
+.gh-orb-2{width:400px;height:400px;background:rgba(245,200,0,.14);top:20%;right:-5%;animation-delay:-5s}
+.gh-orb-3{width:320px;height:320px;background:rgba(20,80,140,.28);bottom:0;left:38%;animation-delay:-3s}
+@keyframes gh-float{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(24px,32px) scale(1.08)}
+}
+.gh-preview{
+  position:absolute;
+  inset:108px 0 34px auto;
+  z-index:1;
+  width:min(56vw,840px);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  padding-right:42px;
+  opacity:.72;
+  pointer-events:none;
+}
+.gh-preview img{
+  width:100%;
+  height:100%;
+  min-height:142px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  filter:saturate(1.08) contrast(1.03);
+  box-shadow:0 18px 46px rgba(0,0,0,.28);
+}
+.gh-preview img:nth-child(1){grid-row:span 2}
+.gh-preview img:nth-child(4){grid-column:span 2}
+.gh::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(90deg,var(--navy) 0%,rgba(6,17,28,.92) 34%,rgba(6,17,28,.42) 78%,rgba(6,17,28,.7) 100%);
+  pointer-events:none;
+}
+
+/* hero content */
+.gh-inner{
+  position:relative;z-index:2;
+  max-width:1400px;margin:0 auto;
+  padding:0 60px;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  opacity:1;
+  transform:none;
+}
+.gh-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-bottom:20px;
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);
+}
+.gh-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 5px rgba(245,200,0,.18),0 0 16px rgba(245,200,0,.4);
+  animation:pulse-dot 2.4s ease-in-out infinite;
+}
+@keyframes pulse-dot{
+  0%,100%{box-shadow:0 0 0 5px rgba(245,200,0,.18),0 0 16px rgba(245,200,0,.4)}
+  50%{box-shadow:0 0 0 10px rgba(245,200,0,.06),0 0 28px rgba(245,200,0,.5)}
+}
+
+.gh-title{
+  font-family:var(--font-display);
+  font-size:clamp(72px,10vw,148px);
+  line-height:.84;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+.gh-title-accent{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--gold);
+  display:block;
+}
+.gh-title-solid{display:block;color:#fff}
+
+.gh-desc{
+  margin-top:28px;max-width:480px;
+  color:rgba(255,255,255,.65);
+  font-size:16px;line-height:1.85;
+  font-weight:300;
+}
+
+/* hero right — stat cards */
+.gh-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.gh-stat{
+  padding:22px 20px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(14px);
+  position:relative;
+  overflow:hidden;
+  transition:border-color .3s,background .3s;
+}
+.gh-stat:hover{border-color:rgba(245,200,0,.35);background:rgba(245,200,0,.05)}
+.gh-stat::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.04),transparent);
+}
+.gh-stat strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:52px;line-height:.9;
+  color:var(--gold);
+  text-shadow:0 0 30px rgba(245,200,0,.3);
+}
+.gh-stat span{
+  display:block;margin-top:10px;
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+
+/* scroll hint */
+.gh-scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+}
+.gh-scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,rgba(245,200,0,.7),transparent);
+  animation:scroll-drop 2s ease-in-out infinite;
+}
+@keyframes scroll-drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ─── GALLERY SECTION ────────────────────────────────────── */
+.gs{
+  padding:72px 0 120px;
+  background:var(--navy);
+  position:relative;
+}
+.gs::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,200,0,.3) 50%,transparent);
+}
+.gs-inner{max-width:1400px;margin:0 auto;padding:0 60px}
+
+/* toolbar */
+.gs-toolbar{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;margin-bottom:40px;
+}
+.gs-toolbar-left h2{
+  font-family:var(--font-display);
+  font-size:clamp(36px,4vw,56px);
+  line-height:1;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:#fff;
+}
+.gs-toolbar-left p{
+  margin-top:10px;
+  color:var(--gray);
+  font-size:14px;
+  max-width:480px;
+  font-weight:300;
+}
+
+/* filter bar */
+.gs-filters{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-bottom:36px;
+}
+.gs-filter-btn{
+  padding:8px 18px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:99px;
+  background:transparent;
+  color:rgba(255,255,255,.55);
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .25s;
+}
+.gs-filter-btn:hover{border-color:rgba(245,200,0,.4);color:var(--gold)}
+.gs-filter-btn.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--navy);
+  font-weight:500;
+}
+
+/* image count badge */
+.gs-count-badge{
+  flex-shrink:0;
+  padding:10px 20px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:99px;
+  background:rgba(255,255,255,.04);
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gray);
+  transition:all .3s;
+}
+
+/* ─── MASONRY GRID ───────────────────────────────────────── */
+.gs-grid{
+  columns:4;
+  column-gap:12px;
+  transition:opacity .4s;
+  opacity:1;
+  transform:none;
+}
+.gs-grid.filtering{opacity:.5;pointer-events:none}
+
+.gc{
+  position:relative;
+  break-inside:avoid;
+  margin-bottom:12px;
+  overflow:hidden;
+  border-radius:14px;
+  cursor:pointer;
+  background:var(--navy3);
+  outline:none;
+  border:none;
+  display:block;
+  width:100%;
+  min-height:160px;
+  transition:transform .4s var(--ease-out-expo), box-shadow .4s;
+}
+.gc:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+}
+.gc:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px rgba(245,200,0,.25);
+  z-index:2;
+}
+
+.gc img{
+  display:block;width:100%;height:auto;min-height:160px;object-fit:cover;
+  transition:transform .6s var(--ease-out-expo),filter .5s;
+}
+.gc:hover img{
+  transform:scale(1.06);
+  filter:brightness(1.05) saturate(1.1);
+}
+
+.gc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,17,28,.85) 0%,rgba(6,17,28,.15) 48%,transparent 100%);
+  opacity:0;
+  transition:opacity .35s;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px;
+  border-radius:14px;
+}
+.gc:hover .gc-overlay{opacity:1}
+
+.gc-label{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.gc-label-text{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.85);
+}
+.gc-expand-icon{
+  width:32px;height:32px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.1);
+  transition:background .25s,border-color .25s;
+  flex-shrink:0;
+}
+.gc:hover .gc-expand-icon{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--navy);
+}
+.gc-expand-icon svg{color:currentColor}
+
+/* ─── LIGHTBOX ───────────────────────────────────────────── */
+.glb{
+  position:fixed;inset:0;z-index:10000;
+  display:none;
+  align-items:center;justify-content:center;
+  background:rgba(3,8,14,.96);
+  backdrop-filter:blur(24px) saturate(1.4);
+  padding:0;
+}
+.glb.open{display:flex;animation:glb-in .35s var(--ease-out-expo) both}
+@keyframes glb-in{from{opacity:0;backdrop-filter:blur(0) saturate(1)}to{opacity:1}}
+
+.glb-stage{
+  position:relative;
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:80px 96px 80px;
+}
+.glb-img-wrap{
+  max-width:calc(100vw - 192px);
+  max-height:calc(100vh - 160px);
+  display:flex;align-items:center;justify-content:center;
+}
+.glb-img-wrap img{
+  max-width:100%;max-height:calc(100vh - 160px);
+  object-fit:contain;
+  border-radius:10px;
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+  animation:glb-img-in .3s var(--ease-out-expo) both;
+}
+@keyframes glb-img-in{
+  from{opacity:0;transform:scale(.95)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* top bar */
+.glb-top{
+  position:absolute;top:0;left:0;right:0;
+  padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(6,17,28,.9),transparent);
+}
+.glb-brand{
+  font-family:var(--font-display);
+  font-size:16px;letter-spacing:.1em;
+  color:rgba(255,255,255,.5);
+}
+.glb-counter{
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.18em;
+  color:rgba(255,255,255,.5);
+}
+.glb-close-btn{
+  width:44px;height:44px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  display:grid;place-items:center;
+  cursor:pointer;
+  font-size:22px;line-height:1;
+  transition:background .25s,border-color .25s,color .25s;
+}
+.glb-close-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+
+/* nav arrows */
+.glb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  display:grid;place-items:center;
+  cursor:pointer;
+  transition:background .25s,border-color .25s,color .25s,transform .25s;
+}
+.glb-nav:hover{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--navy);
+  transform:translateY(-50%) scale(1.1);
+}
+.glb-nav-prev{left:20px}
+.glb-nav-next{right:20px}
+
+/* caption strip */
+.glb-caption-bar{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 24px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(to top,rgba(6,17,28,.9),transparent);
+}
+.glb-caption-pill{
+  padding:8px 20px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:99px;
+  background:rgba(13,31,47,.8);
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);
+}
+
+/* thumbnail filmstrip */
+.glb-strip{
+  position:absolute;bottom:64px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;
+  max-width:min(600px,80vw);
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:4px 2px 2px;
+  scrollbar-width:none;
+}
+.glb-strip::-webkit-scrollbar{display:none}
+.glb-thumb{
+  flex-shrink:0;
+  width:52px;height:36px;
+  border-radius:6px;
+  overflow:hidden;
+  border:2px solid transparent;
+  cursor:pointer;
+  opacity:.5;
+  transition:opacity .25s,border-color .25s,transform .25s;
+}
+.glb-thumb:hover{opacity:.8;transform:scaleY(1.08)}
+.glb-thumb.active{border-color:var(--gold);opacity:1}
+.glb-thumb img{width:100%;height:100%;object-fit:cover}
+
+/* ─── CTA BAND ───────────────────────────────────────────── */
+.cta-band{
+  padding:80px 0;
+  background:linear-gradient(135deg,var(--navy2),var(--navy3));
+  position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+             linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+.cta-panel{
+  position:relative;z-index:1;
+  max-width:1400px;margin:0 auto;padding:0 60px;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  flex-wrap:wrap;
+}
+.cta-panel h3{
+  font-family:var(--font-display);
+  font-size:clamp(32px,4vw,54px);
+  line-height:1;text-transform:uppercase;letter-spacing:.04em;
+}
+.cta-panel p{margin-top:10px;color:var(--gray);font-weight:300}
+.cta-actions{display:flex;gap:14px;flex-wrap:wrap;flex-shrink:0}
+.btn-p{
+  padding:14px 32px;
+  background:var(--gold);
+  color:var(--navy);
+  font-family:var(--font-mono);
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:500;
+  border-radius:8px;
+  text-decoration:none;
+  transition:background .25s,transform .2s,box-shadow .25s;
+  box-shadow:0 4px 20px rgba(245,200,0,.25);
+}
+.btn-p:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,200,0,.35)}
+.btn-o{
+  padding:14px 32px;
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;
+  font-family:var(--font-mono);
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  border-radius:8px;
+  text-decoration:none;
+  transition:border-color .25s,background .25s,transform .2s;
+}
+.btn-o:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);transform:translateY(-2px)}
+
+/* ─── REVEAL ANIMATION ───────────────────────────────────── */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s var(--ease-out-expo),transform .7s var(--ease-out-expo);
+}
+.reveal.in,.reveal.revealed{opacity:1!important;transform:translateY(0)!important}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width:1100px){
+  .gs-grid{columns:3}
+}
+@media(max-width:900px){
+  .gh-inner{grid-template-columns:1fr;gap:36px}
+  .gh-stats{max-width:400px}
+  .gs-toolbar{flex-direction:column;align-items:flex-start}
+  .gh-preview{width:100%;inset:92px 0 0 0;padding:0 20px;opacity:.28}
+  .gh::after{background:linear-gradient(to bottom,rgba(6,17,28,.74),var(--navy) 72%)}
+}
+@media(max-width:700px){
+  .gh-inner,.gs-inner,.cta-panel{padding-left:24px;padding-right:24px}
+  .gs-grid{columns:2;column-gap:8px}
+  .gc{margin-bottom:8px}
+  .glb-stage{padding:72px 56px 100px}
+  .glb-img-wrap{max-width:calc(100vw - 112px)}
+  .glb-nav-prev{left:8px}
+  .glb-nav-next{right:8px}
+  .glb-strip{bottom:56px;max-width:calc(100vw - 48px)}
+  .gh{min-height:auto;padding-top:130px}
+  .gh-preview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gh-preview img{min-height:110px}
+}
+@media(max-width:420px){
+  .gs-grid{columns:1}
+  .gh-title{font-size:clamp(60px,18vw,80px)}
+}
 </style>
 </head>
-<body data-page="gallery" data-theme="light">
-<div class="cursor" id="cur"></div><div class="cursor-ring" id="cur-ring"></div>
-<nav id="navbar"><div class="nav-stripe"></div><div class="nav-shell"><div class="nav-orb nav-orb-1"></div><div class="nav-orb nav-orb-2"></div><div class="nav-orb nav-orb-3"></div><div class="nav-inner"><a class="nav-logo" href="/"><div class="nav-logo-mark"><div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div><img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra full logo"></div><div class="nav-brand-text"><strong>Flowchip Infra Pvt Ltd</strong><em></em></div></a><div class="nav-center"><a class="nav-link" href="/">Home</a><a class="nav-link" href="/services">Services</a><a class="nav-link" href="/about">About</a><a class="nav-link" href="/projects">Projects</a><a class="nav-link active" href="/gallery">Gallery</a><a class="nav-link" href="/process">Process</a></div><div class="nav-right"><button class="nav-theme-btn" data-theme-toggle aria-label="Toggle theme"><span class="ntb-icon" data-theme-icon>&#9728;</span><span data-theme-label>Dark Mode</span></button><a class="nav-cta-btn" href="/contact"><span>Contact Us</span><svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()"><span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span></button></div></div></div></div></nav>
-<div class="mob-nav" id="mob-menu"><a href="/" onclick="closeMob()">Home</a><a href="/services" onclick="closeMob()">Services</a><a href="/about" onclick="closeMob()">About</a><a href="/projects" onclick="closeMob()">Projects</a><a href="/gallery" onclick="closeMob()">Gallery</a><a href="/process" onclick="closeMob()">Process</a><a href="/contact" onclick="closeMob()">Contact</a><div class="mob-contact-row"><a href="tel:+917254000010" onclick="closeMob()">72540 00010</a><a href="/contact" onclick="closeMob()">Get a Quote</a></div><span class="mob-close-hint">Press Esc or tap link to close</span></div>
+<body data-page="gallery">
+
+<div id="fc-cursor"></div>
+<div id="fc-cursor-ring"></div>
+
+<!-- ─────────────── NAV (preserved) ─────────────── -->
+<nav id="navbar">
+  <div class="nav-stripe"></div>
+  <div class="nav-shell">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/">
+        <div class="nav-logo-mark">
+          <div class="nlm-orbit"></div><div class="nlm-ring"></div><div class="nlm-ping"></div>
+          <img src="WhatsApp Image 2026-04-17 at 12.47.21 PM.jpeg" alt="Flowchip Infra logo">
+        </div>
+        <div class="nav-brand-text"><strong>Flowchip Infra Pvt Ltd</strong></div>
+      </a>
+      <div class="nav-center">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/services">Services</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/projects">Projects</a>
+        <a class="nav-link active" href="/gallery">Gallery</a>
+        <a class="nav-link" href="/process">Process</a>
+      </div>
+      <div class="nav-right">
+        <a class="nav-cta-btn" href="/contact">
+          <span>Contact Us</span>
+          <svg class="nav-cta-arrow" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M7.5 2.5 12 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button class="nav-ham-btn" id="ham-btn" aria-label="Menu" onclick="toggleMob()">
+          <span class="nhb-line"></span><span class="nhb-line"></span><span class="nhb-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mob-nav" id="mob-menu">
+  <a href="/" onclick="closeMob()">Home</a>
+  <a href="/services" onclick="closeMob()">Services</a>
+  <a href="/about" onclick="closeMob()">About</a>
+  <a href="/projects" onclick="closeMob()">Projects</a>
+  <a href="/gallery" onclick="closeMob()">Gallery</a>
+  <a href="/process" onclick="closeMob()">Process</a>
+  <a href="/contact" onclick="closeMob()">Contact</a>
+</div>
 
 <main>
-  <section class="gallery-hero">
-    <div class="gallery-hero-shell">
+  <!-- ─── HERO ─── -->
+  <section class="gh">
+    <div class="gh-grid"></div>
+    <div class="gh-orbs">
+      <div class="gh-orb gh-orb-1"></div>
+      <div class="gh-orb gh-orb-2"></div>
+      <div class="gh-orb gh-orb-3"></div>
+    </div>
+    <div class="gh-preview" aria-hidden="true">
+      <img src="assets/gallery/gallery-001.jpeg" alt="">
+      <img src="assets/gallery/gallery-012.jpeg" alt="">
+      <img src="assets/gallery/gallery-024.jpeg" alt="">
+      <img src="assets/gallery/gallery-038.jpeg" alt="">
+      <img src="assets/gallery/gallery-052.jpeg" alt="">
+      <img src="assets/gallery/gallery-098.jpeg" alt="">
+    </div>
+    <div class="gh-inner">
       <div>
-        <div class="breadcrumb" style="margin-bottom:16px"><a href="/">Home</a><span>/</span><span>Gallery</span></div>
-        <div class="gallery-eyebrow">Project Photography</div>
-        <h1>Worksite <span>Gallery</span></h1>
-        <p>Real project images from civil, architecture, interior, and site execution work. Select any image to view it larger.</p>
+        <div class="gh-eyebrow">Project Photography</div>
+        <h1 class="gh-title">
+          <span class="gh-title-solid">Worksite</span>
+          <span class="gh-title-accent">Gallery</span>
+        </h1>
+        <p class="gh-desc">Real project images from civil, architecture, interior, and site execution work. Select any image to view it larger — keyboard and swipe navigation supported.</p>
       </div>
-      <div class="gallery-summary">
-        <div class="gallery-summary-item"><strong id="hero-image-count">58</strong><span>Total images</span></div>
-        <div class="gallery-summary-item"><strong>1</strong><span>Full-screen viewer</span></div>
+      <div class="gh-stats">
+        <div class="gh-stat">
+          <strong id="stat-count">98</strong>
+          <span>Total images</span>
+        </div>
+        <div class="gh-stat">
+          <strong>4+</strong>
+          <span>Project types</span>
+        </div>
+        <div class="gh-stat">
+          <strong>HD</strong>
+          <span>Full-res viewer</span>
+        </div>
+        <div class="gh-stat">
+          <strong>∞</strong>
+          <span>Browse all</span>
+        </div>
       </div>
+    </div>
+    <div class="gh-scroll-hint">
+      <span>Scroll</span>
+      <div class="gh-scroll-line"></div>
     </div>
   </section>
 
-  <section class="gallery-section">
-    <div class="s-inner">
-      <div class="gallery-toolbar reveal">
-        <div>
+  <!-- ─── GALLERY ─── -->
+  <section class="gs">
+    <div class="gs-inner">
+      <div class="gs-toolbar reveal">
+        <div class="gs-toolbar-left">
           <h2>All Project Images</h2>
-          <p>Browse the complete image set from the original images folder. The layout keeps thumbnails compact while preserving a large-view option for inspection.</p>
+          <p>The complete image set from site work. Click any card to open the full-screen viewer.</p>
         </div>
-        <div class="gallery-count" id="gallery-count">58 Images</div>
+        <div class="gs-count-badge" id="count-badge">98 Images</div>
       </div>
-      <div class="gallery-grid-full reveal" id="gallery-grid"></div>
+
+      <div class="gs-filters reveal" id="filter-bar">
+        <button class="gs-filter-btn active" data-filter="all">All</button>
+        <button class="gs-filter-btn" data-filter="interior">Interior</button>
+        <button class="gs-filter-btn" data-filter="civil">Civil Works</button>
+        <button class="gs-filter-btn" data-filter="site">Site Progress</button>
+        <button class="gs-filter-btn" data-filter="finishing">Finishing</button>
+      </div>
+
+      <div class="gs-grid reveal" id="gallery-grid"></div>
     </div>
   </section>
 </main>
 
-<div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true">
-  <button class="glb-btn glb-close" id="glb-close" type="button" aria-label="Close">&times;</button>
-  <button class="glb-btn glb-prev" id="glb-prev" type="button" aria-label="Previous image"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M9 2 4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <img id="glb-img" src="" alt="">
-  <button class="glb-btn glb-next" id="glb-next" type="button" aria-label="Next image"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="m5 2 5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <div class="glb-caption" id="glb-caption"></div>
+<!-- ─── LIGHTBOX ─── -->
+<div class="glb" id="glb" role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+  <div class="glb-stage">
+    <!-- top bar -->
+    <div class="glb-top">
+      <div class="glb-brand">Flowchip Infra</div>
+      <div class="glb-counter" id="glb-counter">01 / 98</div>
+      <button class="glb-close-btn" id="glb-close" aria-label="Close viewer">&times;</button>
+    </div>
+
+    <!-- image -->
+    <div class="glb-img-wrap" id="glb-img-wrap">
+      <img id="glb-img" src="" alt="">
+    </div>
+
+    <!-- nav -->
+    <button class="glb-nav glb-nav-prev" id="glb-prev" aria-label="Previous image">
+      <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
+        <path d="M9 2 4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="glb-nav glb-nav-next" id="glb-next" aria-label="Next image">
+      <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
+        <path d="m5 2 5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- caption -->
+    <div class="glb-caption-bar">
+      <div class="glb-caption-pill" id="glb-caption">Image 01 / 98</div>
+    </div>
+
+    <!-- filmstrip -->
+    <div class="glb-strip" id="glb-strip"></div>
+  </div>
 </div>
 
+<!-- ─── CTA ─── -->
 <section class="cta-band">
   <div class="cta-panel reveal">
-    <div><h3>Want to discuss a similar project?</h3><p>Share the site, scope, and timeline. The team can help shape the right execution plan.</p></div>
-    <div class="cta-panel-actions"><a href="/contact" class="btn-p">Start an Enquiry</a><a href="/projects" class="btn-o">View Projects</a></div>
+    <div>
+      <h3>Want to discuss a <br>similar project?</h3>
+      <p>Share the site, scope, and timeline. The team shapes the right execution plan.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="/contact" class="btn-p">Start an Enquiry</a>
+      <a href="/projects" class="btn-o">View Projects</a>
+    </div>
   </div>
 </section>
 
 <div data-shared-footer></div>
+
+<!-- footer loader (preserved) -->
 <script>
-(function(){try{var xhr=new XMLHttpRequest();xhr.open('GET','footer.html',false);xhr.send(null);if(!(xhr.status===200||xhr.status===0))throw new Error('HTTP '+xhr.status);var doc=new DOMParser().parseFromString(xhr.responseText,'text/html');doc.querySelectorAll('link[rel="stylesheet"], style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'shared-footer-style-'+idx:'shared-footer-link-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-shared-footer-marker="'+marker+'"]'))return;var clone=node.cloneNode(true);clone.setAttribute('data-shared-footer-marker',marker);document.head.appendChild(clone);});var footer=doc.querySelector('#site-footer');var holder=document.querySelector('[data-shared-footer]');if(holder&&footer)holder.replaceWith(footer);doc.querySelectorAll('script').forEach(function(node){var script=document.createElement('script');if(node.src)script.src=node.src;else script.textContent=node.textContent;document.body.appendChild(script);});}catch(e){console.warn('Shared footer load failed',e);}})();
+(function(){try{var xhr=new XMLHttpRequest();xhr.open('GET','footer.html',false);xhr.send(null);if(!(xhr.status===200||xhr.status===0))return;var doc=new DOMParser().parseFromString(xhr.responseText,'text/html');doc.querySelectorAll('link[rel="stylesheet"],style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'sfs-'+idx:'sfl-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-sfm="'+marker+'"]'))return;var c=node.cloneNode(true);c.setAttribute('data-sfm',marker);document.head.appendChild(c);});var f=doc.querySelector('#site-footer');var h=document.querySelector('[data-shared-footer]');if(h&&f)h.replaceWith(f);doc.querySelectorAll('script').forEach(function(n){var s=document.createElement('script');if(n.src)s.src=n.src;else s.textContent=n.textContent;document.body.appendChild(s);});}catch(e){}})();
 </script>
 <script src="assets/site.js"></script>
+
 <script>
-const galleryImages=[
+/* ─── DATA ─── */
+const galleryImages = [
   "interior.jpeg",
   "WhatsApp Image 2026-04-28 at 3.12.32 PM.jpeg",
   "WhatsApp Image 2026-04-28 at 3.12.34 PM.jpeg",
@@ -117,6 +804,46 @@ const galleryImages=[
   "WhatsApp Image 2026-04-28 at 3.14.27 PM.jpeg",
   "WhatsApp Image 2026-04-28 at 3.15.31 PM.jpeg",
   "WhatsApp Image 2026-04-28 at 3.16.29 PM.jpeg",
+  "WhatsApp Image 2026-05-17 at 11.31.45 AM.jpeg",
+  "WhatsApp Image 2026-05-17 at 11.32.02 AM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.26.45 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.26.46 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.26.46 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.27.19 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.30.03 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.04 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.04 PM (2).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.04 PM (3).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.04 PM (4).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.04 PM (5).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.04 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.40 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.41 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.31.41 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (2).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (3).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (4).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (5).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (6).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (7).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM (8).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.32.56 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.33.27 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.33.27 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.34.37 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.34.37 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.34.38 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.34.38 PM (2).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.34.38 PM (3).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.34.38 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.35.41 PM (1).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.35.41 PM (2).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.35.41 PM (3).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.35.41 PM (4).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.35.41 PM (5).jpeg",
+  "WhatsApp Image 2026-05-19 at 4.35.41 PM.jpeg",
+  "WhatsApp Image 2026-05-19 at 4.36.42 PM.jpeg",
   "WhatsApp Image 2026-05-19 at 4.37.12 PM (1).jpeg",
   "WhatsApp Image 2026-05-19 at 4.37.12 PM.jpeg",
   "WhatsApp Image 2026-05-19 at 4.39.36 PM (1).jpeg",
@@ -165,55 +892,160 @@ const galleryImages=[
   "WhatsApp Image 2026-05-19 at 4.53.06 PM.jpeg",
   "WhatsApp Image 2026-05-19 at 4.53.07 PM.jpeg"
 ];
-(function(){
-  const grid=document.getElementById('gallery-grid');
-  const count=document.getElementById('gallery-count');
-  const heroCount=document.getElementById('hero-image-count');
-  if(count)count.textContent=galleryImages.length+' Images';
-  if(heroCount)heroCount.textContent=galleryImages.length;
-  galleryImages.forEach(function(name,index){
-    const btn=document.createElement('button');
-    btn.className='gallery-card';
-    btn.type='button';
-    btn.setAttribute('aria-label','Open gallery image '+(index+1));
-    btn.innerHTML='<img src="original images/'+name+'" alt="Flowchip Infra gallery image '+(index+1)+'" loading="lazy"><div class="gallery-card-label"><span>Image '+String(index+1).padStart(2,'0')+'</span><svg viewBox="0 0 24 24" fill="none"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
-    btn.addEventListener('click',function(){openGallery(index);});
+
+/* assign simple filter categories (round-robin for demo) */
+const filterCategories = ['interior','civil','site','finishing'];
+const imageData = galleryImages.map((name, i) => ({
+  name,
+  path: 'assets/gallery/gallery-' + String(i + 1).padStart(3,'0') + '.jpeg',
+  index: i,
+  category: name.includes('interior') ? 'interior' : filterCategories[i % filterCategories.length],
+  label: 'Image ' + String(i+1).padStart(2,'0')
+}));
+
+/* ─── CURSOR ─── */
+const cur = document.getElementById('fc-cursor');
+const curRing = document.getElementById('fc-cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function animateRing(){
+  rx += (mx-rx)*.18; ry += (my-ry)*.18;
+  curRing.style.left=rx+'px'; curRing.style.top=ry+'px';
+  requestAnimationFrame(animateRing);
+})();
+
+/* ─── BUILD GRID ─── */
+const grid = document.getElementById('gallery-grid');
+const badge = document.getElementById('count-badge');
+const statCount = document.getElementById('stat-count');
+
+function buildGrid(filter) {
+  const filtered = filter === 'all' ? imageData : imageData.filter(d => d.category === filter);
+  badge.textContent = filtered.length + ' Images';
+  statCount.textContent = imageData.length;
+  grid.innerHTML = '';
+  filtered.forEach((d, visIdx) => {
+    const btn = document.createElement('button');
+    btn.className = 'gc';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Open ' + d.label);
+    btn.style.animationDelay = (visIdx * 28) + 'ms';
+    btn.innerHTML = `
+      <img src="${d.path}" alt="Flowchip Infra ${d.label}" loading="lazy">
+      <div class="gc-overlay">
+        <div class="gc-label">
+          <span class="gc-label-text">${d.label}</span>
+          <div class="gc-expand-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    `;
+    btn.addEventListener('click', () => openLightbox(d.index));
     grid.appendChild(btn);
   });
-})();
-let galleryIndex=0;
-function setGalleryImage(index){
-  galleryIndex=(index+galleryImages.length)%galleryImages.length;
-  const img=document.getElementById('glb-img');
-  const caption=document.getElementById('glb-caption');
-  img.src='original images/'+galleryImages[galleryIndex];
-  img.alt='Flowchip Infra gallery image '+(galleryIndex+1);
-  caption.textContent='Image '+String(galleryIndex+1).padStart(2,'0')+' / '+String(galleryImages.length).padStart(2,'0');
 }
-function openGallery(index){
-  const box=document.getElementById('gallery-lightbox');
-  setGalleryImage(index);
-  box.classList.add('open');
-  box.setAttribute('aria-hidden','false');
+
+buildGrid('all');
+
+/* ─── FILTER LOGIC ─── */
+document.getElementById('filter-bar').addEventListener('click', e => {
+  const btn = e.target.closest('.gs-filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.gs-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  grid.classList.add('filtering');
+  setTimeout(() => {
+    buildGrid(btn.dataset.filter);
+    grid.classList.remove('filtering');
+  }, 250);
+});
+
+/* ─── LIGHTBOX ─── */
+const lb = document.getElementById('glb');
+const lbImg = document.getElementById('glb-img');
+const lbCounter = document.getElementById('glb-counter');
+const lbCaption = document.getElementById('glb-caption');
+const lbStrip = document.getElementById('glb-strip');
+let currentIdx = 0;
+
+/* build filmstrip once */
+imageData.forEach((d, i) => {
+  const t = document.createElement('button');
+  t.className = 'glb-thumb';
+  t.type = 'button';
+  t.setAttribute('aria-label', d.label);
+  t.innerHTML = `<img src="${d.path}" alt="${d.label}" loading="lazy">`;
+  t.addEventListener('click', () => setLightboxImage(i));
+  lbStrip.appendChild(t);
+});
+
+function setLightboxImage(idx) {
+  currentIdx = (idx + imageData.length) % imageData.length;
+  const d = imageData[currentIdx];
+  const wrap = document.getElementById('glb-img-wrap');
+  // fade swap
+  lbImg.style.opacity = '0';
+  lbImg.style.transform = 'scale(.97)';
+  setTimeout(() => {
+    lbImg.src = d.path;
+    lbImg.alt = d.label;
+    lbImg.style.transition = 'opacity .3s, transform .3s';
+    lbImg.style.opacity = '1';
+    lbImg.style.transform = 'scale(1)';
+  }, 150);
+  const n = currentIdx + 1;
+  const total = imageData.length;
+  lbCounter.textContent = String(n).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+  lbCaption.textContent = d.label + ' — ' + String(n).padStart(2,'0') + ' of ' + total;
+  // filmstrip active
+  lbStrip.querySelectorAll('.glb-thumb').forEach((t,i) => t.classList.toggle('active', i===currentIdx));
+  // scroll strip to active thumb
+  const active = lbStrip.children[currentIdx];
+  if (active) active.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
+
+function openLightbox(idx) {
+  setLightboxImage(idx);
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
+  document.getElementById('glb-close').focus();
 }
-function closeGallery(){
-  const box=document.getElementById('gallery-lightbox');
-  box.classList.remove('open');
-  box.setAttribute('aria-hidden','true');
+function closeLightbox() {
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
 }
-function moveGallery(step){setGalleryImage(galleryIndex+step);}
-document.getElementById('glb-close').addEventListener('click',closeGallery);
-document.getElementById('glb-prev').addEventListener('click',function(){moveGallery(-1);});
-document.getElementById('glb-next').addEventListener('click',function(){moveGallery(1);});
-document.getElementById('gallery-lightbox').addEventListener('click',function(e){if(e.target.id==='gallery-lightbox')closeGallery();});
-document.addEventListener('keydown',function(e){
-  if(!document.getElementById('gallery-lightbox').classList.contains('open'))return;
-  if(e.key==='Escape')closeGallery();
-  if(e.key==='ArrowLeft')moveGallery(-1);
-  if(e.key==='ArrowRight')moveGallery(1);
+
+document.getElementById('glb-close').addEventListener('click', closeLightbox);
+document.getElementById('glb-prev').addEventListener('click', () => setLightboxImage(currentIdx - 1));
+document.getElementById('glb-next').addEventListener('click', () => setLightboxImage(currentIdx + 1));
+lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('glb-stage')) closeLightbox(); });
+
+/* keyboard */
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') setLightboxImage(currentIdx - 1);
+  if (e.key === 'ArrowRight') setLightboxImage(currentIdx + 1);
 });
+
+/* touch swipe */
+let touchStartX = 0;
+lb.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, {passive:true});
+lb.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) setLightboxImage(dx < 0 ? currentIdx+1 : currentIdx-1);
+});
+
+/* ─── REVEAL ON SCROLL ─── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin:'0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 </script>
 </body>
 </html>
