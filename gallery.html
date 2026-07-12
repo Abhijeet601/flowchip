@@ -670,12 +670,12 @@ body:has(.gc:hover) #fc-cursor-ring{width:0;height:0;opacity:0;}
       <div class="gh-orb gh-orb-3"></div>
     </div>
     <div class="gh-preview" aria-hidden="true">
-      <img src="assets/gallery/gallery-001.jpeg" alt="">
-      <img src="assets/gallery/gallery-012.jpeg" alt="">
-      <img src="assets/gallery/gallery-024.jpeg" alt="">
-      <img src="assets/gallery/gallery-038.jpeg" alt="">
-      <img src="assets/gallery/gallery-052.jpeg" alt="">
-      <img src="assets/gallery/gallery-098.jpeg" alt="">
+      <img src="assets/gallery/gallery-001.jpeg" alt="" decoding="async" fetchpriority="high">
+      <img src="assets/gallery/gallery-012.jpeg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/gallery/gallery-024.jpeg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/gallery/gallery-038.jpeg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/gallery/gallery-052.jpeg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/gallery/gallery-098.jpeg" alt="" decoding="async" fetchpriority="low">
     </div>
     <div class="gh-inner">
       <div>
@@ -788,9 +788,9 @@ body:has(.gc:hover) #fc-cursor-ring{width:0;height:0;opacity:0;}
 
 <div data-shared-footer></div>
 
-<!-- footer loader (preserved) -->
+<!-- Load the shared footer without blocking the initial gallery render. -->
 <script>
-(function(){try{var xhr=new XMLHttpRequest();xhr.open('GET','footer.html',false);xhr.send(null);if(!(xhr.status===200||xhr.status===0))return;var doc=new DOMParser().parseFromString(xhr.responseText,'text/html');doc.querySelectorAll('link[rel="stylesheet"],style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'sfs-'+idx:'sfl-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-sfm="'+marker+'"]'))return;var c=node.cloneNode(true);c.setAttribute('data-sfm',marker);document.head.appendChild(c);});var f=doc.querySelector('#site-footer');var h=document.querySelector('[data-shared-footer]');if(h&&f)h.replaceWith(f);doc.querySelectorAll('script').forEach(function(n){var s=document.createElement('script');if(n.src)s.src=n.src;else s.textContent=n.textContent;document.body.appendChild(s);});}catch(e){}})();
+(function(){fetch('footer.html').then(function(r){if(!r.ok)throw new Error('Footer unavailable');return r.text();}).then(function(html){var doc=new DOMParser().parseFromString(html,'text/html');doc.querySelectorAll('link[rel="stylesheet"],style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'sfs-'+idx:'sfl-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-sfm="'+marker+'"]'))return;var c=node.cloneNode(true);c.setAttribute('data-sfm',marker);document.head.appendChild(c);});var f=doc.querySelector('#site-footer');var h=document.querySelector('[data-shared-footer]');if(h&&f)h.replaceWith(f);doc.querySelectorAll('script').forEach(function(n){var s=document.createElement('script');if(n.src)s.src=n.src;else s.textContent=n.textContent;document.body.appendChild(s);});}).catch(function(){});}());
 </script>
 <script src="assets/site.js"></script>
 
@@ -935,7 +935,7 @@ function buildGrid(filter) {
     btn.setAttribute('aria-label', 'Open ' + d.label);
     btn.style.animationDelay = (visIdx * 28) + 'ms';
     btn.innerHTML = `
-      <img src="${d.path}" alt="Flowchip Infra ${d.label}" loading="lazy">
+      <img src="${d.path}" alt="Flowchip Infra ${d.label}" loading="lazy" decoding="async" fetchpriority="low">
       <div class="gc-overlay">
         <div class="gc-label">
           <span class="gc-label-text">${d.label}</span>
@@ -977,16 +977,23 @@ let currentIdx = 0;
 let imageRequestId = 0;
 let lastFocusedCard = null;
 
-/* build filmstrip once */
-imageData.forEach((d, i) => {
-  const t = document.createElement('button');
-  t.className = 'glb-thumb';
-  t.type = 'button';
-  t.setAttribute('aria-label', d.label);
-  t.innerHTML = `<img src="${d.path}" alt="${d.label}" loading="lazy">`;
-  t.addEventListener('click', () => setLightboxImage(i));
-  lbStrip.appendChild(t);
-});
+/* Build the 98-image filmstrip only if the viewer is opened. */
+let stripBuilt = false;
+function buildFilmstrip() {
+  if (stripBuilt) return;
+  stripBuilt = true;
+  const fragment = document.createDocumentFragment();
+  imageData.forEach((d, i) => {
+    const t = document.createElement('button');
+    t.className = 'glb-thumb';
+    t.type = 'button';
+    t.setAttribute('aria-label', d.label);
+    t.innerHTML = `<img src="${d.path}" alt="${d.label}" loading="lazy" decoding="async">`;
+    t.addEventListener('click', () => setLightboxImage(i));
+    fragment.appendChild(t);
+  });
+  lbStrip.appendChild(fragment);
+}
 
 function setLightboxImage(idx) {
   currentIdx = (idx + imageData.length) % imageData.length;
@@ -1023,6 +1030,7 @@ function setLightboxImage(idx) {
 
 function openLightbox(idx) {
   lastFocusedCard = document.activeElement;
+  buildFilmstrip();
   setLightboxImage(idx);
   lb.classList.add('open');
   lb.setAttribute('aria-hidden','false');
