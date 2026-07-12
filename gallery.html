@@ -61,8 +61,12 @@ body{
   transform:translate(-50%,-50%);
   transition:transform .12s var(--ease-out-expo),width .35s,height .35s,opacity .3s,border-color .3s;
 }
-body:has(.gallery-card:hover) #fc-cursor{width:48px;height:48px;background:rgba(245,200,0,.15);}
-body:has(.gallery-card:hover) #fc-cursor-ring{width:0;height:0;opacity:0;}
+body:has(.gc:hover) #fc-cursor{width:48px;height:48px;background:rgba(245,200,0,.15);}
+body:has(.gc:hover) #fc-cursor-ring{width:0;height:0;opacity:0;}
+@media (hover:none), (pointer:coarse){
+  body{cursor:auto}
+  #fc-cursor,#fc-cursor-ring{display:none}
+}
 
 /* ─── HERO ───────────────────────────────────────────────── */
 .gh{
@@ -970,6 +974,8 @@ const lbCounter = document.getElementById('glb-counter');
 const lbCaption = document.getElementById('glb-caption');
 const lbStrip = document.getElementById('glb-strip');
 let currentIdx = 0;
+let imageRequestId = 0;
+let lastFocusedCard = null;
 
 /* build filmstrip once */
 imageData.forEach((d, i) => {
@@ -985,17 +991,25 @@ imageData.forEach((d, i) => {
 function setLightboxImage(idx) {
   currentIdx = (idx + imageData.length) % imageData.length;
   const d = imageData[currentIdx];
-  const wrap = document.getElementById('glb-img-wrap');
-  // fade swap
+  const requestId = ++imageRequestId;
+  // Preload before swapping so navigation never flashes a blank image.
   lbImg.style.opacity = '0';
   lbImg.style.transform = 'scale(.97)';
-  setTimeout(() => {
+  const nextImage = new Image();
+  nextImage.onload = () => {
+    if (requestId !== imageRequestId) return;
     lbImg.src = d.path;
     lbImg.alt = d.label;
     lbImg.style.transition = 'opacity .3s, transform .3s';
     lbImg.style.opacity = '1';
     lbImg.style.transform = 'scale(1)';
-  }, 150);
+  };
+  nextImage.onerror = () => {
+    if (requestId !== imageRequestId) return;
+    lbImg.style.opacity = '1';
+    lbImg.style.transform = 'scale(1)';
+  };
+  nextImage.src = d.path;
   const n = currentIdx + 1;
   const total = imageData.length;
   lbCounter.textContent = String(n).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
@@ -1008,6 +1022,7 @@ function setLightboxImage(idx) {
 }
 
 function openLightbox(idx) {
+  lastFocusedCard = document.activeElement;
   setLightboxImage(idx);
   lb.classList.add('open');
   lb.setAttribute('aria-hidden','false');
@@ -1018,6 +1033,7 @@ function closeLightbox() {
   lb.classList.remove('open');
   lb.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
+  if (lastFocusedCard && document.contains(lastFocusedCard)) lastFocusedCard.focus();
 }
 
 document.getElementById('glb-close').addEventListener('click', closeLightbox);
