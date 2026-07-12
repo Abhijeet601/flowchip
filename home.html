@@ -1729,8 +1729,7 @@
   <script>
     (function(){
       try{
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET','footer.html',false);
+        return; // Loaded asynchronously by assets/site.js.
         xhr.send(null);
         if(!(xhr.status===200 || xhr.status===0)) throw new Error('HTTP ' + xhr.status);
         var doc = new DOMParser().parseFromString(xhr.responseText,'text/html');

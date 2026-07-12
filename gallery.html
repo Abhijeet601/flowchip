@@ -788,10 +788,6 @@ body:has(.gc:hover) #fc-cursor-ring{width:0;height:0;opacity:0;}
 
 <div data-shared-footer></div>
 
-<!-- Load the shared footer without blocking the initial gallery render. -->
-<script>
-(function(){fetch('footer.html').then(function(r){if(!r.ok)throw new Error('Footer unavailable');return r.text();}).then(function(html){var doc=new DOMParser().parseFromString(html,'text/html');doc.querySelectorAll('link[rel="stylesheet"],style').forEach(function(node,idx){var marker=node.tagName==='STYLE'?'sfs-'+idx:'sfl-'+(node.getAttribute('href')||idx);if(document.head.querySelector('[data-sfm="'+marker+'"]'))return;var c=node.cloneNode(true);c.setAttribute('data-sfm',marker);document.head.appendChild(c);});var f=doc.querySelector('#site-footer');var h=document.querySelector('[data-shared-footer]');if(h&&f)h.replaceWith(f);doc.querySelectorAll('script').forEach(function(n){var s=document.createElement('script');if(n.src)s.src=n.src;else s.textContent=n.textContent;document.body.appendChild(s);});}).catch(function(){});}());
-</script>
 <script src="assets/site.js"></script>
 
 <script>

@@ -352,9 +352,16 @@ function submitForm(e){
     return;
   }
   const endpoint = form.dataset.googleFormAction;
+  if (!endpoint || endpoint.includes('YOUR_FORM_ID')) {
+    if (succ) {
+      succ.textContent = form.dataset.formPendingText || 'Online enquiries are temporarily unavailable. Please call or email us.';
+      succ.style.display = 'block';
+    }
+    return;
+  }
   btn.textContent = 'Sending…';
   btn.disabled = true;
-  if (endpoint && endpoint.indexOf('docs.google.com/forms/d/e/') !== -1) {
+  if (endpoint.indexOf('docs.google.com/forms/d/e/') !== -1) {
     const data = new FormData(form);
     fetch(endpoint, { method: 'POST', mode: 'no-cors', body: data });
   }
@@ -368,3 +375,32 @@ function submitForm(e){
     }, 4000);
   }, 1200);
 }
+/* Load the shared footer asynchronously on every page. */
+(function loadSharedFooter(){
+  const holder = document.querySelector('[data-shared-footer]');
+  if (!holder) return;
+  fetch('footer.html')
+    .then(response => {
+      if (!response.ok) throw new Error(`Footer request failed: ${response.status}`);
+      return response.text();
+    })
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      doc.querySelectorAll('link[rel="stylesheet"],style').forEach((node, index) => {
+        const marker = node.tagName === 'STYLE' ? `footer-style-${index}` : `footer-link-${node.getAttribute('href') || index}`;
+        if (document.head.querySelector(`[data-shared-footer-marker="${marker}"]`)) return;
+        const clone = node.cloneNode(true);
+        clone.dataset.sharedFooterMarker = marker;
+        document.head.appendChild(clone);
+      });
+      const footer = doc.querySelector('#site-footer');
+      if (footer && holder.isConnected) holder.replaceWith(footer);
+      doc.querySelectorAll('script').forEach(node => {
+        const script = document.createElement('script');
+        if (node.src) script.src = node.src;
+        else script.textContent = node.textContent;
+        document.body.appendChild(script);
+      });
+    })
+    .catch(error => console.warn('Shared footer load failed', error));
+})();
